@@ -96,9 +96,9 @@ function Home() {
       <Box padding={'0 0rem'}>
 
         <Center marginBottom='20px' borderRadius='0px 0px 20px 20px' bg={'white'} className={styles.box} w='100%' h='55px'>
-          <Text marginRight='1px' className={styles.neonText} color={'#050D29'} fontSize={'45px'} fontWeight={'900'}>NE</Text>
-          <IconButton borderRadius={'20px'} className={styles.boxicon} aria-label='Search database' onClick={() => setModalConfig(!modalConfig)} icon={<AiTwotoneSetting color='#050D29' size='40px' />} />
-          <Text marginLeft='1px' className={styles.neonText} color={'#050D29'} fontSize={'45px'} fontWeight={'900'}>N</Text>
+          <Text marginRight='1px' className={styles.neonText} color={'#050D29'} fontSize={'45px'} fontWeight={'300'}>NE</Text>
+          <Text marginLeft='1px' className={styles.neonText} color={'#050D29'} fontSize={'45px'} fontWeight={'300'}>O</Text>
+<Text marginLeft='1px' className={styles.neonText} color={'#050D29'} fontSize={'45px'} fontWeight={'300'}>N</Text>
 
         </Center>
         <Center>
@@ -138,6 +138,9 @@ function Home() {
         <Center>
           <Center margin={'0px 0px 20px 0px'} borderRadius='0px 0px 20px 20px' w='100%'>
             <Heading w='100px' fontWeight={'600'} marginLeft='5px' fontSize={'18px'}>{time} - {gale}</Heading>
+            <Box bg='white' borderRadius={'20px'} >
+            <IconButton borderRadius={'20px'} className={styles.boxicon} aria-label='Search database' onClick={() => setModalConfig(!modalConfig)} icon={<AiTwotoneSetting color='#050D29' size='40px' />} />
+            </Box>
           </Center>
         </Center>
         <Center w='100%'>
