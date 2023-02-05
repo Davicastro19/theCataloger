@@ -58,9 +58,7 @@ function Home() {
 
 
 
-  function onClose(event: MouseEvent<HTMLButtonElement, MouseEvent>): void {
-    throw new Error('Function not implemented.');
-  }
+
 
   return (
 
