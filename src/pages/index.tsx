@@ -151,9 +151,9 @@ function Home() {
               {data.map((item, index) => (
                 <WrapItem key={index} >
                   <Center marginBottom={'20px'} marginTop='15px' bg='#000323' w='280px' h='495px' borderRadius={'10px'} className={styles.box}>
-                    <Card align='center' w='100%' h='100%' bg='#000323'>
-                      <CardHeader>
-                        <Center flexDir={'column'}>
+                    <Card color='white'align='center' w='100%' h='100%' bg='#000323'>
+                      <CardHeader >
+                        <Center  flexDir={'column'}>
                           <Heading fontWeight={'700'} fontSize={'20px'}>{toJS(item.strategy).nameStrategy}</Heading>
                           <Heading marginTop='10px' marginBottom='10px' fontWeight={'500'} fontSize={'16px'}>{toJS(item.strategy).pairStrategy} - {toJS(item.strategy).assertivenessStrategy}</Heading>
                           <Wrap spacing='5px'>
