@@ -95,11 +95,26 @@ function Home() {
       </Modal>
       <Box padding={'0 0rem'}>
 
-        <Center marginBottom='20px' borderRadius='0px 0px 20px 20px' bg={'white'} className={styles.box} w='100%' h='55px'>
-          <Text marginRight='1px' className={styles.neonText} color={'#050D29'} fontSize={'45px'} fontWeight={'300'}>NE</Text>
-          <Text marginLeft='1px' className={styles.neonText} color={'#050D29'} fontSize={'45px'} fontWeight={'300'}>O</Text>
-<Text marginLeft='1px' className={styles.neonText} color={'#050D29'} fontSize={'45px'} fontWeight={'300'}>N</Text>
+        <Center marginBottom='20px' borderRadius='0px 0px 20px 20px' bg={'white'} className={styles.box} w='100%' h='55px' justifyContent={'space-between'}>
+        <Center     >
+        <Link w='100px' marginLeft={'5px'} href='https://t.me/ProgamadorReact' isExternal>
+                <Button  w='100px' colorScheme='twitter' leftIcon={<FaTelegram />}>
 
+                  Dev </Button>
+              </Link>
+
+                      
+                    </Center>
+                    <Center>
+                    <Text marginRight='1px' className={styles.neonText} color={'#050D29'} fontSize={'45px'} fontWeight={'300'}>NEON</Text>
+
+                    </Center>
+                    <Center  >
+                    <Link href='https://t.me/neoncatalogador' isExternal> <Button  w='100px'  colorScheme='twitter' leftIcon={<FaTelegram />}>
+                  Grupo</Button>
+                </Link>
+                    </Center>
+         
         </Center>
         <Center>
           <Center margin={'10px 0px 20px 0px'} borderRadius='0px 0px 20px 20px' w='100%' h='50px'>
@@ -234,7 +249,7 @@ function Home() {
 
         </Center>
 
-
+<section id='contato'>
         <Box
           flexDir={'column'}
           marginTop='10px'
@@ -282,6 +297,7 @@ function Home() {
 
           </Box>
         </Box>
+        </section>
       </Box></>
   )
 }
