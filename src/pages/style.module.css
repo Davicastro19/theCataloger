@@ -1,0 +1,62 @@
+
+.box { 
+  border: 0.1rem solid #fff;
+  padding: 0.4em;
+  box-shadow: 0 0 .1rem #fff,
+            0 0 .1rem #fff,
+            0 0 1.2rem #13bbfe,
+            0 0 0.1rem #13bbfe,
+            0 0 0.8rem #13bbfe,
+            inset 0 0 0.1rem #13bbfe; 
+}
+.boxicon { 
+  border: 0.1rem solid #130136;
+  padding: 0.4em;
+  box-shadow: 0 0 .1rem #130136,
+            0 0 .1rem #130136,
+            0 0 1.1rem #13bbfe,
+            0 0 0.1rem #13bbfe,
+            0 0 0.1rem #13bbfe,
+            inset 0 0 0.1rem #13bbfe; 
+}
+
+.boxred { 
+  border: 0.1rem solid #130136;
+  padding: 0.4em;
+  box-shadow: 0 0 .1rem #130136,
+            0 0 .1rem #130136,
+            0 0 1.2rem #13bbfe,
+            0 0 0.1rem #00F0FF,
+            0 0 0.8rem #13bbfe,
+            inset 0 0 0.1rem #00F0FF; 
+}
+
+.footer {
+    display: flex;
+    flex: 1;
+    padding: 2rem 0;
+    border-top: 1px solid #eaeaea;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .neonText {
+    color: #fff;
+    text-shadow:
+      0 0 3px #00F0FF,
+      0 0 10px #fff,
+      0 0 1px #fff,
+      0 0 5px #fff,
+      0 0 5px #fff,
+      0 0 1px #00F0FF,
+      0 0 1px #00F0FF,
+      0 0 1px #00F0FF;
+  }
+  .footer a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+  }
+
+/* Just styling the content of the div, the *magic* in the previous rules */
