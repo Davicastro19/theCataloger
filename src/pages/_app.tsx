@@ -1,5 +1,6 @@
 import { ChakraProvider } from '@chakra-ui/react'
 import { theme } from '../../styles/styles'
+import  '../../styles/globals.css'
 import "@fontsource/roboto"
 import '@fontsource/roboto/700.css'
 import '@fontsource/roboto/900.css'
