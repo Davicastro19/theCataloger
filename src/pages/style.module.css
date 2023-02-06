@@ -43,14 +43,26 @@
   .neonText {
     color: #fff;
     text-shadow:
-      0 0 3px #00F0FF,
-      0 0 10px #fff,
-      0 0 1px #fff,
-      0 0 5px #fff,
-      0 0 5px #fff,
-      0 0 1px #00F0FF,
-      0 0 1px #00F0FF,
-      0 0 1px #00F0FF;
+      0 0 3px #13bbfe,
+      0 0 10px #13bbfe,
+      0 0 1px #13bbfe,
+      0 0 1px #13bbfe,
+      0 0 1px #13bbfe,
+      0 0 1px #13bbfe,
+      0 0 1px #13bbfe,
+      0 0 1px #13bbfe;
+  }
+  .invistaText {
+    color: #fff;
+    text-shadow:
+      0 0 3px #ffb733,
+      0 0 10px #ffb733,
+      0 0 1px #ffb733,
+      0 0 1px #ffa600,
+      0 0 1px #ffb733,
+      0 0 1px #ffb733,
+      0 0 1px #ffb733,
+      0 0 1px #ffb733;
   }
   .footer a {
     display: flex;

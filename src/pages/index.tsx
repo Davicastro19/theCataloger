@@ -97,20 +97,21 @@ function Home() {
 
         <Center marginBottom='20px' borderRadius='0px 0px 20px 20px' bg={'white'} className={styles.box} w='100%' h='55px' justifyContent={'space-between'}>
         <Center     >
-        <Link w='100px' marginLeft={'5px'} href='https://t.me/ProgamadorReact' isExternal>
-                <Button  w='100px' colorScheme='twitter' leftIcon={<FaTelegram />}>
+        <Link w='65px' marginLeft={'5px'} href='https://t.me/ProgamadorReact' isExternal>
+                <Button size='xs'  w='65px' colorScheme='twitter' leftIcon={<FaTelegram />}>
 
                   Dev </Button>
               </Link>
 
                       
                     </Center>
-                    <Center>
-                    <Text marginRight='1px' className={styles.neonText} color={'#050D29'} fontSize={'45px'} fontWeight={'300'}>NEON</Text>
+                    <Center >
+                    <Text marginRight='1px' className={styles.neonText} color={'#050D29'} fontSize={'30px'} fontWeight={'300'}>NEON-</Text>
+                    <Text marginRight='1px' className={styles.invistaText} color={'#050D29'} fontSize={'30px'} fontWeight={'300'}>INVISTA</Text>
 
                     </Center>
                     <Center  >
-                    <Link href='https://t.me/neoncatalogador' isExternal> <Button  w='100px'  colorScheme='twitter' leftIcon={<FaTelegram />}>
+                    <Link href='https://t.me/neoncatalogador' w='65px' isExternal> <Button  w='65px'  size='xs' colorScheme='twitter' leftIcon={<FaTelegram />}>
                   Grupo</Button>
                 </Link>
                     </Center>
