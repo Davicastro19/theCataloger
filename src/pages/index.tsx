@@ -162,7 +162,7 @@ function Home() {
         <Center      >
         <Link w='290px' marginLeft={'5px'} marginBottom={'10px'} href='https://t.me/invistastrategy_bot' isExternal>
                 <Button className={styles.boxicon} size='lg'   w='290px' colorScheme='twitter' rightIcon={<FaTelegram size={30} />} leftIcon={<FaRobot size={30} />}>
-                  AUTIMATIZAR VIA BOT </Button>
+                 AUTIMATIZAR VIA BOT </Button>
               </Link>
 
                       
