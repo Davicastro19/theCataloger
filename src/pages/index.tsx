@@ -6,7 +6,7 @@ import axios from 'axios';
 import { toJS } from 'mobx';
 import Quadrant from '../components/quadrant';
 import { AiTwotoneSetting } from 'react-icons/ai';
-import { FaInstagram, FaTelegram } from 'react-icons/fa';
+import { FaInstagram, FaRobot, FaTelegram } from 'react-icons/fa';
 
 
 
@@ -159,6 +159,15 @@ function Home() {
             </Box>
           </Center>
         </Center>
+        <Center      >
+        <Link w='290px' marginLeft={'5px'} marginBottom={'10px'} href='https://t.me/invistastrategy_bot' isExternal>
+                <Button className={styles.boxicon} size='lg'   w='290px' colorScheme='twitter' rightIcon={<FaTelegram size={30} />} leftIcon={<FaRobot size={30} />}>
+                  AUTIMATIZAR VIA BOT </Button>
+              </Link>
+
+                      
+                    </Center>
+        
         <Center w='100%'>
 
           {data.length > 0 &&
