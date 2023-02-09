@@ -296,12 +296,12 @@ function Home() {
           </Center>
           <Box marginTop='20px' marginLeft='10px' flexDir={'row'} display={'flex'} >
 
-            <Text marginTop={'1px'} fontWeight={'300'} fontSize={'12px'} color='black'>
+            <Text marginTop={'1px'} fontWeight={'300'} fontSize={'12px'} color='white'>
               © 2023 DESIGNED & DEV. </Text>
-            <Heading marginLeft={'5px'} fontWeight={'700'} fontSize={'15px'} color='black'>
+            <Heading marginLeft={'5px'} fontWeight={'700'} fontSize={'15px'} color='white'>
               By Davi Castro
             </Heading>
-            <Heading marginLeft={'5px'} marginTop={'4px'} fontWeight={'300'} fontSize={'12px'} color='black'>
+            <Heading marginLeft={'5px'} marginTop={'4px'} fontWeight={'300'} fontSize={'12px'} color='white'>
               PRIVACY POLICY</Heading>
 
 
