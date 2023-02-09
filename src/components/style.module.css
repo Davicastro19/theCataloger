@@ -9,7 +9,18 @@
             0 0 0.8rem #fe1313,
             inset 0 0 0.1rem #fe1313; 
 }
-
+.neonBox {
+  color: #000323;
+  text-shadow:
+    0 0 3px #000323,
+    0 0 10px #000323,
+    0 0 1px #000323,
+    0 0 1px #13bbfe,
+    0 0 3px #13bbfe,
+    0 0 3px #13bbfe,
+    0 0 3px #13bbfe,
+    0 0 3px #13bbfe;
+}
 .boxgreen { 
   border: 0.1rem solid #fff;
   padding: 0.4em;
@@ -28,10 +39,10 @@
   padding: 0.4em;
   box-shadow: 0 0 .1rem #fff,
             0 0 .1rem #fff,
-            0 0 1.2rem #ffb300,
-            0 0 0.1rem #ffb300,
-            0 0 0.8rem #ffb300,
-            inset 0 0 0.1rem #ffb300; 
+            0 0 1.2rem #ff6321,
+            0 0 0.1rem #ff6321,
+            0 0 0.8rem #ff6321,
+            inset 0 0 0.1rem #ff6321; 
 }
 
 .boxyellow { 

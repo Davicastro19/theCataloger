@@ -95,7 +95,7 @@ function Home() {
       </Modal>
       <Box padding={'0 0rem'}>
 
-        <Center marginBottom='20px' borderRadius='0px 0px 20px 20px' bg={'white'} className={styles.box} w='100%' h='55px' justifyContent={'space-between'}>
+        <Center marginBottom='20px' borderRadius='0px 0px 20px 20px' bg={'#000323'} className={styles.box} w='100%' h='55px' justifyContent={'space-between'}>
         <Center     >
         <Link w='65px' marginLeft={'5px'} href='https://t.me/ProgamadorReact' isExternal>
                 <Button size='xs'  w='65px' colorScheme='twitter' leftIcon={<FaTelegram />}>
@@ -105,9 +105,9 @@ function Home() {
 
                       
                     </Center>
-                    <Center >
-                    <Text marginRight='1px' className={styles.neonText} color={'#050D29'} fontSize={'30px'} fontWeight={'300'}>NEON-</Text>
-                    <Text marginRight='1px' className={styles.invistaText} color={'#050D29'} fontSize={'30px'} fontWeight={'300'}>INVISTA</Text>
+                    <Center  flexDir='column' h='55px' >
+                    <Text marginRight='1px' className={styles.neonText} color={'#13bbfe'} fontSize={'35px'} fontWeight={'300'} h='30px'>NEON</Text>
+                    <Text marginRight='1px' className={styles.invistaText} color={'#ffb300'} fontSize={'20px'} fontWeight={'300'} marginTop={'5px'}>INVISTA</Text>
 
                     </Center>
                     <Center  >
@@ -171,11 +171,11 @@ function Home() {
         <Center w='100%'>
 
           {data.length > 0 &&
-            <Wrap spacing='30px' justify='center' marginBottom={'10px'}>
+            <Wrap spacing='30px' justify='center' bg='#000323' marginBottom={'10px'}>
 
               {data.map((item, index) => (
                 <WrapItem key={index} >
-                  <Center marginBottom={'20px'} marginTop='15px' bg='#000323' w='280px' h='495px' borderRadius={'10px'} className={styles.box}>
+                  <Center marginBottom={'20px'} marginTop='15px' bg='#000323' w='280px' h='495px' borderRadius={'10px'} className={styles.neonBox}>
                     <Card color='white'align='center' w='100%' h='100%' bg='#000323'>
                       <CardHeader >
                         <Center  flexDir={'column'}>
@@ -265,7 +265,7 @@ function Home() {
           marginTop='10px'
           borderTop='1px'
           padding='2rem 0'
-          borderRadius='20px 20px 00px 0px' bg={'white'} className={styles.box}
+          borderRadius='20px 20px 00px 0px' bg={'#000323'} className={styles.box}
         >
 
           <Center>

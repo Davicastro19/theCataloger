@@ -23,7 +23,7 @@ export default function Quadrant({value }): JSX.Element {
          </Center>
     }
     {value === 'w2' &&
-         <Center  borderRadius={'4px'} bg='#ffb300' className={styles.boxorange}>
+         <Center  borderRadius={'4px'} bg='#ff783e' className={styles.boxorange}>
         
          <Box    h='5px' w='5px' > </Box>
          </Center>

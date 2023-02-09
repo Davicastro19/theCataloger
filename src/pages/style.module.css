@@ -1,6 +1,6 @@
 
 .box { 
-  border: 0.1rem solid #fff;
+  border: 0.1rem solid #000323;
   padding: 0.4em;
   box-shadow: 0 0 .1rem #fff,
             0 0 .1rem #fff,
@@ -41,28 +41,28 @@
   }
   
   .neonText {
-    color: #fff;
+    color: #000323;
     text-shadow:
+      0 0 3px #000323,
+      0 0 10px #000323,
+      0 0 1px #000323,
+      0 0 1px #13bbfe,
       0 0 3px #13bbfe,
-      0 0 10px #13bbfe,
-      0 0 1px #13bbfe,
-      0 0 1px #13bbfe,
-      0 0 1px #13bbfe,
-      0 0 1px #13bbfe,
-      0 0 1px #13bbfe,
-      0 0 1px #13bbfe;
+      0 0 3px #13bbfe,
+      0 0 3px #13bbfe,
+      0 0 3px #13bbfe;
   }
   .invistaText {
-    color: #fff;
+    color: #000323;
     text-shadow:
-      0 0 3px #ffb733,
-      0 0 10px #ffb733,
-      0 0 1px #ffb733,
-      0 0 1px #ffa600,
-      0 0 1px #ffb733,
-      0 0 1px #ffb733,
-      0 0 1px #ffb733,
-      0 0 1px #ffb733;
+      0 0 3px #000323,
+      0 0 10px red,
+      0 0 1px red,
+      0 0 3px red,
+      0 0 3px #FF4D00,
+      0 0 3px #FF4D00,
+      0 0 3px #FF4D00,
+      0 0 3px red;
   }
   .footer a {
     display: flex;
@@ -72,3 +72,13 @@
   }
 
 /* Just styling the content of the div, the *magic* in the previous rules */
+.neonBox {
+  border: 0.1rem solid #fff;
+  padding: 0.4em;
+  box-shadow: 0 0 .1rem #fff,
+            0 0 .1rem #fff,
+            0 0 1.2rem #13bbfe,
+            0 0 0.1rem #13bbfe,
+            0 0 0.8rem #13bbfe,
+            inset 0 0 0.1rem #13bbfe; 
+}
