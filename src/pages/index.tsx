@@ -168,14 +168,14 @@ function Home() {
                       
                     </Center>
         
-        <Center w='100%'>
+        <Center w='100%' >
 
           {data.length > 0 &&
-            <Wrap spacing='30px' justify='center' bg='#000323' marginBottom={'10px'}>
+            <Wrap spacing='15px' justify='center' bg='#000' marginBottom={'10px'}>
 
               {data.map((item, index) => (
                 <WrapItem key={index} >
-                  <Center marginBottom={'20px'} marginTop='15px' bg='#000323' w='280px' h='495px' borderRadius={'10px'} className={styles.neonBox}>
+                  <Center margin={'15px 15px 20px 10px'}  bg='#000323' w='280px' h='495px' borderRadius={'10px'} className={styles.neonBox}>
                     <Card color='white'align='center' w='100%' h='100%' bg='#000323'>
                       <CardHeader >
                         <Center  flexDir={'column'}>
