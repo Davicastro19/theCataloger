@@ -346,9 +346,23 @@ function Home() {
               </Heading>
               <Heading marginLeft={'5px'} marginTop={'4px'} fontWeight={'300'} fontSize={'12px'} color='white'>
                 PRIVACY POLICY</Heading>
-
-
+            
             </Box>
+            <Box marginTop='20px' marginLeft='10px' flexDir={'column'} display={'flex'} >
+ 
+<Text marginTop={'1px'} fontWeight={'300'} fontSize={'12px'} color='white'>
+AJUDE A MANTER AS FERRAMENTAS DE FORMA GRATUITA. </Text>
+<Text marginTop={'1px'} fontWeight={'300'} fontSize={'12px'} color='white'>
+E A FAZERMOS MELHORIAS</Text>
+<Text marginTop={'1px'} fontWeight={'300'} fontSize={'12px'} color='white'>
+DOAÇÕES: PIX - EMAIL: davi18827@gmail.com (C6 Bank)</Text>
+<Text marginTop={'1px'} fontWeight={'300'} fontSize={'12px'} color='white'>
+Solicite uma melhoria ou algo que pode ser util para você</Text>
+<Text marginTop={'1px'} fontWeight={'300'} fontSize={'12px'} color='white'>
+na opção Telegram Desenvolvedor.</Text>
+
+
+</Box> 
           </Box>
         </section>
       </Box></>
