@@ -30,7 +30,7 @@ function Home() {
     const getStrategy = async () => {
       var config = {
         method: 'get',
-        url: 'https://apigo.herokuapp.com/strategy/TODOS/' + time + '/' + gale + '/TODOS',
+        url: 'https://apigo.herokuapp.com/strategy/' + par + '/' + time + '/' + gale + '/TODOS',
         headers: {}
       };
 
@@ -54,7 +54,7 @@ function Home() {
 
 
   }
-    , [time, gale])
+    , [time, gale, par])
 
 
 
@@ -83,10 +83,44 @@ function Home() {
               <option value='option2'>Estratégia 2</option>
               <option value='option3'>Estratégia 3</option>
             </Select>
-            <Select marginTop='20px' marginBottom='20px' placeholder='Paridade - Próxima Atualização'>
-              <option value='option1'>Paridade 1</option>
-              <option value='option2'>Paridade 2</option>
-              <option value='option3'>Paridade 3</option>
+            <Select marginTop='20px' marginBottom='20px' onChange={(e) => setPar(e.target.value)} value={par}>
+              <option value='TODOS'>TODOS</option>
+             {/*<option value='BTCUSD'>BTCUSD</option>
+              <option value='EOSUSD'>EOSUSD</option>
+              <option value='ETHUSD'>ETHUSD</option>
+              <option value='LTCUSD'>LTCUSD</option>
+  <option value='XRPUSD'>XRPUSD</option>*/}
+              <option value='AUDCAD'>AUDCAD</option>
+              <option value='AUDCAD-OTC'>AUDCAD-OTC</option>
+              <option value='AUDJPY'>AUDJPY</option>
+              <option value='AUDNZD'>AUDNZD</option>
+              <option value='AUDUSD'>AUDUSD</option>
+              <option value='EURAUD'>EURAUD</option>
+              <option value='EURCAD'>EURCAD</option>
+              <option value='EURGBP'>EURGBP</option>
+              <option value='EURGBP-OTC'>EURGBP-OTC</option>
+              <option value='EURJPY'>EURJPY</option>
+              <option value='EURJPY-OTC'>EURJPY-OTC</option>
+              <option value='EURUSD'>EURUSD</option>
+              <option value='EURUSD-OTC'>EURUSD-OTC</option>
+              <option value='GBPAUD'>GBPAUD</option>
+              <option value='GBPCAD'>GBPCAD</option>
+              <option value='GBPJPY'>GBPJPY</option>
+              <option value='GBPJPY-OTC'>GBPJPY-OTC</option>
+              <option value='GBPNZD'>GBPNZD</option>
+              <option value='GBPUSD'>GBPUSD</option>
+              <option value='GBPUSD-OTC'>GBPUSD-OTC</option>
+              <option value='NZDUSD'>NZDUSD</option>
+              <option value='NZDUSD-OTC'>NZDUSD-OTC</option>
+              <option value='USDCAD'>USDCAD</option>
+              <option value='USDCHF'>USDCHF</option>
+              <option value='USDCHF-OTC'>USDCHF-OTC</option>
+              <option value='USDHKD-OTC'>USDHKD-OTC</option>
+              <option value='USDINR-OTC'>USDINR-OTC</option>
+              <option value='USDJPY'>USDJPY</option>
+              <option value='USDJPY-OTC'>USDJPY-OTC</option>
+              <option value='USDSGD-OTC'>USDSGD-OTC</option>
+              <option value='USDZAR-OTC'>USDZAR-OTC</option>
             </Select>
           </ModalBody>
 
@@ -96,26 +130,26 @@ function Home() {
       <Box padding={'0 0rem'}>
 
         <Center marginBottom='20px' borderRadius='0px 0px 20px 20px' bg={'#000323'} className={styles.box} w='100%' h='55px' justifyContent={'space-between'}>
-        <Center     >
-        <Link w='65px' marginLeft={'5px'} href='https://t.me/ProgamadorReact' isExternal>
-                <Button size='xs'  w='65px' colorScheme='twitter' leftIcon={<FaTelegram />}>
+          <Center     >
+            <Link w='65px' marginLeft={'5px'} href='https://t.me/ProgamadorReact' isExternal>
+              <Button size='xs' w='65px' colorScheme='twitter' leftIcon={<FaTelegram />}>
 
-                  Dev </Button>
-              </Link>
+                Dev </Button>
+            </Link>
 
-                      
-                    </Center>
-                    <Center  flexDir='column' h='55px' >
-                    <Text marginRight='1px' className={styles.neonText} color={'#13bbfe'} fontSize={'35px'} fontWeight={'300'} h='30px'>NEON</Text>
-                    <Text marginRight='1px' className={styles.invistaText} color={'#ffb300'} fontSize={'20px'} fontWeight={'300'} marginTop={'5px'}>INVISTA</Text>
 
-                    </Center>
-                    <Center  >
-                    <Link href='https://t.me/neoncatalogador' w='65px' isExternal> <Button  w='65px'  size='xs' colorScheme='twitter' leftIcon={<FaTelegram />}>
-                  Grupo</Button>
-                </Link>
-                    </Center>
-         
+          </Center>
+          <Center flexDir='column' h='55px' >
+            <Text marginRight='1px' className={styles.neonText} color={'#13bbfe'} fontSize={'35px'} fontWeight={'300'} h='30px'>NEON</Text>
+            <Text marginRight='1px' className={styles.invistaText} color={'#ffb300'} fontSize={'20px'} fontWeight={'300'} marginTop={'5px'}>INVISTA</Text>
+
+          </Center>
+          <Center  >
+            <Link href='https://t.me/neoncatalogador' w='65px' isExternal> <Button w='65px' size='xs' colorScheme='twitter' leftIcon={<FaTelegram />}>
+              Grupo</Button>
+            </Link>
+          </Center>
+
         </Center>
         <Center>
           <Center margin={'10px 0px 20px 0px'} borderRadius='0px 0px 20px 20px' w='100%' h='50px'>
@@ -155,19 +189,28 @@ function Home() {
           <Center margin={'0px 0px 20px 0px'} borderRadius='0px 0px 20px 20px' w='100%'>
             <Heading w='100px' fontWeight={'600'} marginLeft='5px' fontSize={'18px'}>{time} - {gale}</Heading>
             <Box bg='white' borderRadius={'20px'} >
-            <IconButton borderRadius={'20px'} className={styles.boxicon} aria-label='Search database' onClick={() => setModalConfig(!modalConfig)} icon={<AiTwotoneSetting color='#050D29' size='40px' />} />
+              <IconButton borderRadius={'20px'} className={styles.boxicon} aria-label='Search database' onClick={() => setModalConfig(!modalConfig)} icon={<AiTwotoneSetting color='#050D29' size='40px' />} />
             </Box>
           </Center>
         </Center>
+        <Center flexDir='column'>
         <Center      >
-        <Link w='290px' marginLeft={'5px'} marginBottom={'10px'} href='https://t.me/invistastrategy_bot' isExternal>
-                <Button className={styles.boxicon} size='lg'   w='290px' colorScheme='twitter' rightIcon={<FaTelegram size={30} />} leftIcon={<FaRobot size={30} />}>
-                 AUTIMATIZAR VIA BOT </Button>
-              </Link>
+          <Link w='290px' marginLeft={'5px'} marginBottom={'10px'} href='https://t.me/invistastrategy_bot' isExternal>
+            <Button className={styles.boxicon} size='lg' w='300px' colorScheme='twitter' rightIcon={<FaTelegram size={30} />} leftIcon={<FaRobot size={30} />}>
+              AUTIMATIZAR VIA BOT </Button>
+          </Link>
 
-                      
-                    </Center>
-        
+          
+        </Center>
+        <Center      >
+          <Link w='290px' marginLeft={'5px'} marginBottom={'10px'} href='https://t.me/invistaeasy_bot' isExternal>
+            <Button className={styles.boxicon} size='lg' w='300px' colorScheme='twitter' rightIcon={<FaTelegram size={30} />} leftIcon={<FaRobot size={30} />}>
+              CATALOGAR SINAIS FREE </Button>
+          </Link>
+
+          
+        </Center>
+        </Center>
         <Center w='100%' >
 
           {data.length > 0 &&
@@ -175,10 +218,10 @@ function Home() {
 
               {data.map((item, index) => (
                 <WrapItem key={index} >
-                  <Center margin={'15px 15px 20px 10px'}  bg='#000323' w='280px' h='495px' borderRadius={'10px'} className={styles.neonBox}>
-                    <Card color='white'align='center' w='100%' h='100%' bg='#000323'>
+                  <Center margin={'15px 15px 20px 15px'} bg='#000323' w='280px' h='495px' borderRadius={'10px'} className={styles.neonBox}>
+                    <Card color='white' align='center' w='100%' h='100%' bg='#000323'>
                       <CardHeader >
-                        <Center  flexDir={'column'}>
+                        <Center flexDir={'column'}>
                           <Heading fontWeight={'700'} fontSize={'20px'}>{toJS(item.strategy).nameStrategy}</Heading>
                           <Heading marginTop='10px' marginBottom='10px' fontWeight={'500'} fontSize={'16px'}>{toJS(item.strategy).pairStrategy} - {toJS(item.strategy).assertivenessStrategy}</Heading>
                           <Wrap spacing='5px'>
@@ -259,54 +302,54 @@ function Home() {
 
         </Center>
 
-<section id='contato'>
-        <Box
-          flexDir={'column'}
-          marginTop='10px'
-          borderTop='1px'
-          padding='2rem 0'
-          borderRadius='20px 20px 00px 0px' bg={'#000323'} className={styles.box}
-        >
+        <section id='contato'>
+          <Box
+            flexDir={'column'}
+            marginTop='10px'
+            borderTop='1px'
+            padding='2rem 0'
+            borderRadius='20px 20px 00px 0px' bg={'#000323'} className={styles.box}
+          >
 
-          <Center>
-            <Wrap justify={'center'}>
+            <Center>
+              <Wrap justify={'center'}>
 
-              <WrapItem>
+                <WrapItem>
 
-                <Link href='https://www.instagram.com/invistatrading/' isExternal><Button w='300px' colorScheme='facebook' leftIcon={<FaInstagram />}>
-                  Instagram  </Button>
+                  <Link href='https://www.instagram.com/invistatrading/' isExternal><Button w='300px' colorScheme='facebook' leftIcon={<FaInstagram />}>
+                    Instagram  </Button>
+                  </Link>
+                </WrapItem>
+                <WrapItem>
+
+                  <Link href='https://t.me/invistacomsabedoria' isExternal> <Button w='300px' colorScheme='twitter' leftIcon={<FaTelegram />}>
+                    Telegram Grupo</Button>
+                  </Link>
+
+                </WrapItem>
+                <WrapItem><Link href='https://t.me/ProgamadorReact' isExternal>
+                  <Button w='300px' colorScheme='twitter' leftIcon={<FaTelegram />}>
+
+                    Telegram Desenvolvedor </Button>
                 </Link>
-              </WrapItem>
-              <WrapItem>
 
-                <Link href='https://t.me/invistacomsabedoria' isExternal> <Button w='300px' colorScheme='twitter' leftIcon={<FaTelegram />}>
-                  Telegram Grupo</Button>
-                </Link>
+                </WrapItem>
+              </Wrap>
 
-              </WrapItem>
-              <WrapItem><Link href='https://t.me/ProgamadorReact' isExternal>
-                <Button w='300px' colorScheme='twitter' leftIcon={<FaTelegram />}>
+            </Center>
+            <Box marginTop='20px' marginLeft='10px' flexDir={'row'} display={'flex'} >
 
-                  Telegram Desenvolvedor </Button>
-              </Link>
-
-              </WrapItem>
-            </Wrap>
-
-          </Center>
-          <Box marginTop='20px' marginLeft='10px' flexDir={'row'} display={'flex'} >
-
-            <Text marginTop={'1px'} fontWeight={'300'} fontSize={'12px'} color='white'>
-              © 2023 DESIGNED & DEV. </Text>
-            <Heading marginLeft={'5px'} fontWeight={'700'} fontSize={'15px'} color='white'>
-              By Davi Castro
-            </Heading>
-            <Heading marginLeft={'5px'} marginTop={'4px'} fontWeight={'300'} fontSize={'12px'} color='white'>
-              PRIVACY POLICY</Heading>
+              <Text marginTop={'1px'} fontWeight={'300'} fontSize={'12px'} color='white'>
+                © 2023 DESIGNED & DEV. </Text>
+              <Heading marginLeft={'5px'} fontWeight={'700'} fontSize={'15px'} color='white'>
+                By Davi Castro
+              </Heading>
+              <Heading marginLeft={'5px'} marginTop={'4px'} fontWeight={'300'} fontSize={'12px'} color='white'>
+                PRIVACY POLICY</Heading>
 
 
+            </Box>
           </Box>
-        </Box>
         </section>
       </Box></>
   )
