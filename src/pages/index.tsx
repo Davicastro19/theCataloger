@@ -218,7 +218,7 @@ function Home() {
 
               {data.map((item, index) => (
                 <WrapItem key={index} >
-                  <Center margin={'15px 15px 20px 15px'} bg='#000323' w='280px' h='495px' borderRadius={'10px'} className={styles.neonBox}>
+                  <Center margin={'15px 10px 20px 10px'} bg='#000323' w='280px' h='495px' borderRadius={'10px'} className={styles.neonBox}>
                     <Card color='white' align='center' w='100%' h='100%' bg='#000323'>
                       <CardHeader >
                         <Center flexDir={'column'}>
