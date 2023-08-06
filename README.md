@@ -28,7 +28,6 @@ Este é um projeto de um catalogador de estratégias para a plataforma IQ Option
 - [axios](https://axios-http.com): Cliente HTTP baseado em Promises para fazer requisições AJAX no navegador e no Node.js.
 - [mobx-react](https://mobx-react.js.org): Pacote que fornece ferramentas de integração entre MobX e React, permitindo que componentes observem o estado.
 - [react-icons](https://react-icons.github.io/react-icons): Conjunto de ícones populares para React.
-- [Quadrant](https://github.com/seu-usuario/quadrant): Componente personalizado utilizado para representar quadrantes em estatísticas de desempenho.
 
 ## Contribuição
 
