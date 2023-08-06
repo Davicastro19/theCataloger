@@ -7,7 +7,6 @@ Este é um projeto de um catalogador de estratégias para a plataforma IQ Option
 - Cadastro e edição de estratégias com informações detalhadas.
 - Classificação e organização das estratégias por categorias e pares de ativos.
 - Visualização de estatísticas de desempenho das estratégias catalogadas.
-- Opção para anexar notas e comentários às estratégias para referência futura.
 - Pesquisa avançada para encontrar estratégias específicas com base em critérios definidos.
 - Integração com a plataforma IQ Option para importar automaticamente informações de negociação e desempenho das estratégias.
 - Suporte a vários idiomas para uma experiência de usuário global.
