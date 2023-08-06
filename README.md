@@ -44,7 +44,7 @@ Contribuições são bem-vindas! Se você deseja contribuir para este projeto, s
 
 ## Contato
 
-Para mais informações sobre este projeto, entre em contato com [nome do desenvolvedor] ou visite o perfil do desenvolvedor em [https://github.com/Davicastro19](https://github.com/Davicastro19) .
+Para mais informações sobre este projeto, entre em contato no perfil
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
