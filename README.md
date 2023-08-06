@@ -41,13 +41,10 @@ Contribuições são bem-vindas! Se você deseja contribuir para este projeto, s
 4. Faça um push para a sua branch: `git push origin minha-feature`.
 5. Crie um pull request para este repositório.
 
-## Licença
-
-Este projeto está licenciado sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
 ## Contato
 
-Para mais informações sobre este projeto, entre em contato com [nome do desenvolvedor] via e-mail em [seu-email@exemplo.com] ou visite o perfil do desenvolvedor em [https://github.com/seu-usuario](https://github.com/seu-usuario).
+Para mais informações sobre este projeto, entre em contato com [nome do desenvolvedor] ou visite o perfil do desenvolvedor em [https://github.com/seu-usuario](https://github.com/seu-usuario).
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
