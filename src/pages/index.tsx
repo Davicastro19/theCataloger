@@ -1,4 +1,4 @@
-import { Box, Button, Card, CardBody,Image, CardFooter, CardHeader, Center, Heading, Wrap, WrapItem, Text, IconButton, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Select, useToast, HStack, Link } from '@chakra-ui/react';
+import { Box, Button, Card, CardBody, Image, CardFooter, CardHeader, Center, Heading, Wrap, WrapItem, Text, IconButton, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Select, useToast, HStack, Link } from '@chakra-ui/react';
 import { observer } from 'mobx-react';
 import styles from './style.module.css';
 import React, { useEffect, useState } from 'react';
@@ -21,68 +21,69 @@ function Home() {
   const [modalConfig, setModalConfig] = useState(false)
   const toast = useToast()
 
-  function getWL(lista: any){
-  
-  
-  let maxWinStreak = 0;
-  let currentWinStreak = 0;
-  let maxHitStreak = 0;
-  let currentHitStreak = 0;
-  
-  for (const item of lista) {
+  function getWL(lista: any) {
+
+
+    let maxWinStreak = 0;
+    let currentWinStreak = 0;
+    let maxHitStreak = 0;
+    let currentHitStreak = 0;
+
+    for (const item of lista) {
       // Contar vitórias seguidas
       if (item === "W" || item === "G1" || item === "G2") {
-          currentWinStreak++;
-          if (currentWinStreak > maxWinStreak) {
-              maxWinStreak = currentWinStreak;
-          }
+        currentWinStreak++;
+        if (currentWinStreak > maxWinStreak) {
+          maxWinStreak = currentWinStreak;
+        }
       } else {
-          currentWinStreak = 0;
+        currentWinStreak = 0;
       }
-      
+
       // Contar hits seguidos
       if (item === "H") {
-          currentHitStreak++;
-          if (currentHitStreak > maxHitStreak) {
-              maxHitStreak = currentHitStreak;
-          }
+        currentHitStreak++;
+        if (currentHitStreak > maxHitStreak) {
+          maxHitStreak = currentHitStreak;
+        }
       } else {
-          currentHitStreak = 0;
+        currentHitStreak = 0;
       }
-  }
-  return {maxWinStreak, maxHitStreak}
+    }
+    return { maxWinStreak, maxHitStreak }
   }
 
-  async function handleSetOpenConfig(){
-    
+  async function handleSetOpenConfig() {
+
     var config = { method: 'get', url: `https://apithecataloguer-7f868d31f7a6.herokuapp.com/pairs`, headers: {} };
     axios(config).then(function (response) {
-      if(response.data.status){
+      if (response.data.status) {
         setSeletPairs(response.data.pairs)
         toast.closeAll()
         toast({ description: "Atualizado", status: 'success', duration: 9000, isClosable: true, })
       }
-      })
+    })
       .catch(function (error) {
         setData([])
       });
-      setModalConfig(true)
+    setModalConfig(true)
   }
 
-  async function getStrategy(){
-    var config = { method: 'get', url: `https://apithecataloguer-7f868d31f7a6.herokuapp.com/strategy/${pair}/${time.replace('M','')}/${gale.replace('G','')}/${system}`, headers: {} };
+  async function getStrategy() {
+    var config = { method: 'get', url: `https://apithecataloguer-7f868d31f7a6.herokuapp.com/strategy/${pair}/${time.replace('M', '')}/${gale.replace('G', '')}/${system}`, headers: {} };
     axios(config).then(function (response) {
-        
-      if(response.data.status){
+
+      if (response.data.status) {
         setData(response.data.strategy)
         toast.closeAll()
         toast({ description: "Atualizado", status: 'success', duration: 9000, isClosable: true, })
       }
-      })
+    })
       .catch(function (error) {
-       
+
         setData([])
       });
+      setModalConfig(false)
   }
 
 
@@ -100,13 +101,13 @@ function Home() {
   return (
 
     <>
-        <Head>
-                <title>NEON INVISTA</title>
-                <meta name="og:description" content={'Descubra o futuro do mercado probabilístico com o Neon Investe, o melhor Catalogador para Operações Binárias (OB). Com análise em tempo real e catalogação de mais de 28 pares de moedas e 30 estratégias em segundos, nós elevamos a análise de OB a um novo patamar. '} />
-                <meta property="og:image" content={'/logo.png'} />
-                <meta property="og:url" content={`https://the-cataloger.vercel.app/`} />
-                <meta name="twitter:card" content="summary_large_image" />
-            </Head>
+      <Head>
+        <title>NEON INVISTA</title>
+        <meta name="og:description" content={'Descubra o futuro do mercado probabilístico com o Neon Investe, o melhor Catalogador para Operações Binárias (OB). Com análise em tempo real e catalogação de mais de 28 pares de moedas e 30 estratégias em segundos, nós elevamos a análise de OB a um novo patamar. '} />
+        <meta property="og:image" content={'/logo.png'} />
+        <meta property="og:url" content={`https://the-cataloger.vercel.app/`} />
+        <meta name="twitter:card" content="summary_large_image" />
+      </Head>
       <Modal isOpen={modalConfig} onClose={() => setModalConfig(!modalConfig)}>
         <ModalOverlay />
         <ModalContent bg='#000323'>
@@ -114,39 +115,39 @@ function Home() {
 
           <ModalBody borderRadius='0px 0px 10px 10px' className={styles.box} >
             <Select onChange={(e) => setTime(e.target.value)} value={time} marginTop='20px'>
-              <option style={{backgroundColor:'#000323'}} value='M1'>M1</option>
-              <option style={{backgroundColor:'#000323'}} value='M5'>M5</option>
-              <option style={{backgroundColor:'#000323'}} value='M15'>M15</option>
+              <option style={{ backgroundColor: '#000323' }} value='M1'>M1</option>
+              <option style={{ backgroundColor: '#000323' }} value='M5'>M5</option>
+              <option style={{ backgroundColor: '#000323' }} value='M15'>M15</option>
             </Select>
             <Select marginTop='20px' onChange={(e) => setGale(e.target.value)} value={gale}>
-              <option style={{backgroundColor:'#000323'}} value='G0'>FIXA</option>
-              <option style={{backgroundColor:'#000323'}} value='G1'>G1</option>
-              <option style={{backgroundColor:'#000323'}} value='G2'>G2</option>
+              <option style={{ backgroundColor: '#000323' }} value='G0'>FIXA</option>
+              <option style={{ backgroundColor: '#000323' }} value='G1'>G1</option>
+              <option style={{ backgroundColor: '#000323' }} value='G2'>G2</option>
             </Select>
-            <Select   marginTop='20px' value={system} onChange={(e) => setSystem(e.target.value)}>
-            <option style={{backgroundColor:'#000323'}} value="TODOS">Melhor estratégia</option>
-            <option style={{backgroundColor:'#000323'}} value="MHI">MHI</option>
-            <option style={{backgroundColor:'#000323'}} value="MHI2">MHI2</option>
-            <option style={{backgroundColor:'#000323'}} value="MHI3">MHI3</option>
-            <option style={{backgroundColor:'#000323'}} value="MHI Maioria">MHI Maioria</option>
-            <option style={{backgroundColor:'#000323'}} value="MHI2 Maioria">MHI2 Maioria</option>
-            <option style={{backgroundColor:'#000323'}} value="MHI3 Maioria">MHI3 Maioria</option>
-            <option style={{backgroundColor:'#000323'}} value="Milhão">Milhão</option>
-            <option style={{backgroundColor:'#000323'}} value="Milhão Maioria">Milhão Maioria</option>
-            <option style={{backgroundColor:'#000323'}} value="Melhor de 3">Melhor de 3</option>
-            <option style={{backgroundColor:'#000323'}} value="Padrão 23">Padrão 23</option>
-            <option style={{backgroundColor:'#000323'}} value="Padrão 3x1">Padrão 3x1</option>
-            <option style={{backgroundColor:'#000323'}} value="Padrão Ímpar">Padrão Ímpar</option>
-            <option style={{backgroundColor:'#000323'}} value="Torres Gêmeas">Torres Gêmeas</option>
-            <option style={{backgroundColor:'#000323'}} value="Três Mosqueteiros">Três Mosqueteiros</option>
-            <option style={{backgroundColor:'#000323'}} value="Três Vizinhos">Três Vizinhos</option>
+            <Select marginTop='20px' value={system} onChange={(e) => setSystem(e.target.value)}>
+              <option style={{ backgroundColor: '#000323' }} value="TODOS">Melhor estratégia</option>
+              <option style={{ backgroundColor: '#000323' }} value="MHI">MHI</option>
+              <option style={{ backgroundColor: '#000323' }} value="MHI2">MHI2</option>
+              <option style={{ backgroundColor: '#000323' }} value="MHI3">MHI3</option>
+              <option style={{ backgroundColor: '#000323' }} value="MHI Maioria">MHI Maioria</option>
+              <option style={{ backgroundColor: '#000323' }} value="MHI2 Maioria">MHI2 Maioria</option>
+              <option style={{ backgroundColor: '#000323' }} value="MHI3 Maioria">MHI3 Maioria</option>
+              <option style={{ backgroundColor: '#000323' }} value="Milhão">Milhão</option>
+              <option style={{ backgroundColor: '#000323' }} value="Milhão Maioria">Milhão Maioria</option>
+              <option style={{ backgroundColor: '#000323' }} value="Melhor de 3">Melhor de 3</option>
+              <option style={{ backgroundColor: '#000323' }} value="Padrão 23">Padrão 23</option>
+              <option style={{ backgroundColor: '#000323' }} value="Padrão 3x1">Padrão 3x1</option>
+              <option style={{ backgroundColor: '#000323' }} value="Padrão Ímpar">Padrão Ímpar</option>
+              <option style={{ backgroundColor: '#000323' }} value="Torres Gêmeas">Torres Gêmeas</option>
+              <option style={{ backgroundColor: '#000323' }} value="Três Mosqueteiros">Três Mosqueteiros</option>
+              <option style={{ backgroundColor: '#000323' }} value="Três Vizinhos">Três Vizinhos</option>
             </Select>
             <Select marginTop='20px' marginBottom='20px' onChange={(e) => setPar(e.target.value)} value={pair}>
               <option key={12121} value='TODOS'>TODOS</option>
-            {selectPairs.map((p, i) =>  (<option style={{backgroundColor:'#000323'}} key={i} value={p}>{p}</option>))}
+              {selectPairs.map((p, i) => (<option style={{ backgroundColor: '#000323' }} key={i} value={p}>{p}</option>))}
             </Select>
-<Center>
-            <Button mb='30px' colorScheme='twitter' onClick={getStrategy}  >Pesquisar</Button>
+            <Center>
+              <Button mb='30px' colorScheme='twitter' onClick={getStrategy}  >Pesquisar</Button>
             </Center>
           </ModalBody>
 
@@ -177,11 +178,11 @@ function Home() {
           </Center>
 
         </Center>
-        <Center flexDir={'column'} fontSize={'sm'} fontWeight={'bold'} color='blue.300'> 
-        <Text>PARCERIA COM  </Text>
-        <Link marginBottom={'10px'} href=' https://t.me/+RNhOqAbXil1hYjg5' isExternal>
-         
-        <Image borderRadius='25px' w='90px' src={'https://i.imgur.com/Towqk9b.png'} alt='da'/></Link></Center>
+        <Center flexDir={'column'} fontSize={'sm'} fontWeight={'bold'} color='blue.300'>
+          <Text>PARCERIA COM  </Text>
+          <Link marginBottom={'10px'} href=' https://t.me/+RNhOqAbXil1hYjg5' isExternal>
+
+            <Image borderRadius='25px' w='90px' src={'https://i.imgur.com/Towqk9b.png'} alt='da' /></Link></Center>
         <Center>
           <Center margin={'10px 0px 20px 40px'} borderRadius='0px 0px 20px 20px' w='100%' h='50px'>
             <Wrap justify={'center'}  >
@@ -219,40 +220,43 @@ function Home() {
         <Center>
           <Center margin={'0px 0px 20px 0px'} borderRadius='0px 0px 20px 20px' w='100%'>
             <Heading w='100px' fontWeight={'600'} marginLeft='5px' fontSize={'18px'}>{time} - {gale}</Heading>
-            
+
             <Box bg='white' borderRadius={'20px'} >
               <IconButton borderRadius={'20px'} className={styles.boxicon} aria-label='Search database' onClick={handleSetOpenConfig} icon={<AiTwotoneSetting color='#050D29' size='40px' />} />
             </Box>
           </Center>
         </Center>
-        <Center flexDir='column'>
-        <Center      >
-          <Link w='290px' marginLeft={'5px'} marginBottom={'10px'} href='https://t.me/invistastrategy_bot' isExternal>
-            <Button className={styles.boxicon} size='lg' w='300px' colorScheme='twitter' rightIcon={<FaTelegram size={30} />} leftIcon={<FaRobot size={30} />}>
-              AUTIMATIZAR VIA BOT </Button>
-          </Link>
+        <Center>
+        <HStack flexDir={['column', 'row']}>
+          <Center      >
+            <Link w='290px' marginLeft={'5px'} marginBottom={'10px'} href='https://t.me/invistastrategy_bot' isExternal>
+              <Button className={styles.boxicon} size='lg' w='300px' colorScheme='twitter' rightIcon={<FaTelegram size={30} />} leftIcon={<FaRobot size={30} />}>
+                AUTIMATIZAR VIA BOT </Button>
+            </Link>
 
-          
-        </Center>
-        <Center      >
-         
-          <Link w='290px' marginLeft={'5px'} marginBottom={'10px'} href=' https://t.me/+RNhOqAbXil1hYjg5' isExternal>
-            <Button className={styles.boxicon} size='lg' w='300px' colorScheme='twitter' rightIcon={<FaTelegram size={30} />} leftIcon={<FaRobot size={30} />}>
-              
+
+          </Center>
+          <Center      >
+
+            <Link w='290px' marginLeft={'5px'} marginBottom={'10px'} href=' https://t.me/+RNhOqAbXil1hYjg5' isExternal>
+              <Button className={styles.boxicon} size='lg' w='300px' colorScheme='twitter' rightIcon={<FaTelegram size={30} />} leftIcon={<FaRobot size={30} />}>
+
                 LISTAS VIP PREMIUM</Button>
-          </Link>
+            </Link>
 
-          
-        </Center>
-        <Center      >
-          <Link w='290px' marginLeft={'5px'} marginBottom={'10px'} href='https://t.me/invistaeasy_bot' isExternal>
-            <Button className={styles.boxicon} size='lg' w='300px' colorScheme='twitter' rightIcon={<FaTelegram size={30} />} leftIcon={<FaRobot size={30} />}>
-              CATALOGAR SINAIS FREE </Button>
-          </Link>
 
-          
+          </Center>
+          <Center      >
+            <Link w='290px' marginLeft={'5px'} marginBottom={'10px'} href='https://t.me/invistaeasy_bot' isExternal>
+              <Button className={styles.boxicon} size='lg' w='300px' colorScheme='twitter' rightIcon={<FaTelegram size={30} />} leftIcon={<FaRobot size={30} />}>
+                CATALOGAR SINAIS FREE </Button>
+            </Link>
+
+
+          </Center>
+        </HStack>
         </Center>
-        </Center>
+
         <Center w='100%' >
 
           {data.length > 0 &&
@@ -267,31 +271,31 @@ function Home() {
                           <Heading fontWeight={'700'} fontSize={'20px'}>{item.estrategia.toUpperCase()}</Heading>
                           <Heading marginTop='10px' marginBottom='10px' fontWeight={'500'} fontSize={'16px'}>{item.ativo} - {item.winrate}%</Heading>
                           <Wrap spacing='5px'>
-                          {item.quadrantes.filter(x => x === "W").length > 0 &&
-                          <WrapItem>
-                              <Box margin={'8px'}>
-                                <Heading w='25px' fontWeight={'600'} fontSize={'13px'}>{item.quadrantes.filter(x => x === "W").length}</Heading>
-                                    <Quadrant value={'W'} />
-                              </Box>
-                            </WrapItem>
+                            {item.quadrantes.filter(x => x === "W").length > 0 &&
+                              <WrapItem>
+                                <Box margin={'8px'}>
+                                  <Heading w='25px' fontWeight={'600'} fontSize={'13px'}>{item.quadrantes.filter(x => x === "W").length}</Heading>
+                                  <Quadrant value={'W'} />
+                                </Box>
+                              </WrapItem>
                             }
                             {item.quadrantes.filter(x => x === "G1").length > 0 &&
-                            <WrapItem>
-                              <Box margin={'8px'}>
-                                <Heading w='25px' fontWeight={'600'} fontSize={'13px'}>{item.quadrantes.filter(x => x === "G1").length}</Heading>
-                                    <Quadrant value={'G1'} />
-                              </Box>
-                            </WrapItem>
+                              <WrapItem>
+                                <Box margin={'8px'}>
+                                  <Heading w='25px' fontWeight={'600'} fontSize={'13px'}>{item.quadrantes.filter(x => x === "G1").length}</Heading>
+                                  <Quadrant value={'G1'} />
+                                </Box>
+                              </WrapItem>
                             }
                             {item.quadrantes.filter(x => x === "G2").length > 0 &&
-                            <WrapItem>
-                              <Box margin={'8px'}>
-                               <Heading w='25px' fontWeight={'600'} fontSize={'13px'}>{item.quadrantes.filter(x => x === "G2").length}</Heading>
-                                    <Quadrant value={'G2'} />
-                                
-                              </Box>
-                            </WrapItem>
-                              }
+                              <WrapItem>
+                                <Box margin={'8px'}>
+                                  <Heading w='25px' fontWeight={'600'} fontSize={'13px'}>{item.quadrantes.filter(x => x === "G2").length}</Heading>
+                                  <Quadrant value={'G2'} />
+
+                                </Box>
+                              </WrapItem>
+                            }
                             <WrapItem>
                               <Box margin={'8px'}>
                                 {item.quadrantes.filter(x => x === "H").length > 0 &&
@@ -301,7 +305,7 @@ function Home() {
                               </Box>
                             </WrapItem>
 
-                            </Wrap>
+                          </Wrap>
                         </Center>
 
                         <Wrap spacing='5.5px' marginTop='20px'>
@@ -362,7 +366,7 @@ function Home() {
                     Instagram  </Button>
                   </Link>
                 </WrapItem>
-               
+
                 <WrapItem><Link href='https://t.me/reactdavicastro' isExternal>
                   <Button w='300px' colorScheme='twitter' leftIcon={<FaTelegram />}>
 
@@ -382,23 +386,23 @@ function Home() {
               </Heading>
               <Heading marginLeft={'5px'} marginTop={'4px'} fontWeight={'300'} fontSize={'12px'} color='white'>
                 PRIVACY POLICY</Heading>
-            
+
             </Box>
             <Box marginTop='20px' marginLeft='10px' flexDir={'column'} display={'flex'} >
- 
-<Text marginTop={'1px'} fontWeight={'300'} fontSize={'12px'} color='white'>
-AJUDE A MANTER AS FERRAMENTAS DE FORMA GRATUITA. </Text>
-<Text marginTop={'1px'} fontWeight={'300'} fontSize={'12px'} color='white'>
-E A FAZERMOS MELHORIAS</Text>
-<Text marginTop={'1px'} fontWeight={'300'} fontSize={'12px'} color='white'>
-DOAÇÕES: PIX - EMAIL: davi18827@gmail.com (C6 Bank)</Text>
-<Text marginTop={'1px'} fontWeight={'300'} fontSize={'12px'} color='white'>
-Solicite uma melhoria ou algo que pode ser util para você</Text>
-<Text marginTop={'1px'} fontWeight={'300'} fontSize={'12px'} color='white'>
-na opção Telegram Desenvolvedor.</Text>
+
+              <Text marginTop={'1px'} fontWeight={'300'} fontSize={'12px'} color='white'>
+                AJUDE A MANTER AS FERRAMENTAS DE FORMA GRATUITA. </Text>
+              <Text marginTop={'1px'} fontWeight={'300'} fontSize={'12px'} color='white'>
+                E A FAZERMOS MELHORIAS</Text>
+              <Text marginTop={'1px'} fontWeight={'300'} fontSize={'12px'} color='white'>
+                DOAÇÕES: PIX - EMAIL: davi18827@gmail.com (C6 Bank)</Text>
+              <Text marginTop={'1px'} fontWeight={'300'} fontSize={'12px'} color='white'>
+                Solicite uma melhoria ou algo que pode ser util para você</Text>
+              <Text marginTop={'1px'} fontWeight={'300'} fontSize={'12px'} color='white'>
+                na opção Telegram Desenvolvedor.</Text>
 
 
-</Box> 
+            </Box>
           </Box>
         </section>
       </Box></>
