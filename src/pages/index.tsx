@@ -7,7 +7,7 @@ import { toJS } from 'mobx';
 import Quadrant from '../components/quadrant';
 import { AiTwotoneSetting } from 'react-icons/ai';
 import { FaInstagram, FaRobot, FaTelegram } from 'react-icons/fa';
-import { Head } from 'next/document';
+import Head from "next/head";
 
 
 
