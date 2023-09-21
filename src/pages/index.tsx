@@ -7,6 +7,7 @@ import { toJS } from 'mobx';
 import Quadrant from '../components/quadrant';
 import { AiTwotoneSetting } from 'react-icons/ai';
 import { FaInstagram, FaRobot, FaTelegram } from 'react-icons/fa';
+import { Head } from 'next/document';
 
 
 
@@ -99,6 +100,13 @@ function Home() {
   return (
 
     <>
+        <Head>
+                <title>NEON INVISTA</title>
+                <meta name="og:description" content={'Descubra o futuro do mercado probabilístico com o Neon Investe, o melhor Catalogador para Operações Binárias (OB). Com análise em tempo real e catalogação de mais de 28 pares de moedas e 30 estratégias em segundos, nós elevamos a análise de OB a um novo patamar. '} />
+                <meta property="og:image" content={'/logo.png'} />
+                <meta property="og:url" content={`https://the-cataloger.vercel.app/`} />
+                <meta name="twitter:card" content="summary_large_image" />
+            </Head>
       <Modal isOpen={modalConfig} onClose={() => setModalConfig(!modalConfig)}>
         <ModalOverlay />
         <ModalContent bg='#000323'>
