@@ -1,4 +1,4 @@
-import { Box, Button, Card, CardBody, CardFooter, CardHeader, Center, Heading, Wrap, WrapItem, Text, IconButton, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Select, useToast, HStack, Link } from '@chakra-ui/react';
+import { Box, Button, Card, CardBody,Image, CardFooter, CardHeader, Center, Heading, Wrap, WrapItem, Text, IconButton, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Select, useToast, HStack, Link } from '@chakra-ui/react';
 import { observer } from 'mobx-react';
 import styles from './style.module.css';
 import React, { useEffect, useState } from 'react';
@@ -11,50 +11,86 @@ import { FaInstagram, FaRobot, FaTelegram } from 'react-icons/fa';
 
 
 function Home() {
-
-  const [data, setData] = useState<any>([])
+  const [selectPairs, setSeletPairs] = useState([])
+  const [data, setData] = useState([])
   const [time, setTime] = useState('M1')
-  const [par, setPar] = useState('TODOS')
+  const [pair, setPar] = useState('TODOS')
   const [gale, setGale] = useState('G1')
   const [system, setSystem] = useState('TODOS')
   const [modalConfig, setModalConfig] = useState(false)
   const toast = useToast()
 
+  function getWL(lista: any){
+  
+  
+  let maxWinStreak = 0;
+  let currentWinStreak = 0;
+  let maxHitStreak = 0;
+  let currentHitStreak = 0;
+  
+  for (const item of lista) {
+      // Contar vitórias seguidas
+      if (item === "W" || item === "G1" || item === "G2") {
+          currentWinStreak++;
+          if (currentWinStreak > maxWinStreak) {
+              maxWinStreak = currentWinStreak;
+          }
+      } else {
+          currentWinStreak = 0;
+      }
+      
+      // Contar hits seguidos
+      if (item === "H") {
+          currentHitStreak++;
+          if (currentHitStreak > maxHitStreak) {
+              maxHitStreak = currentHitStreak;
+          }
+      } else {
+          currentHitStreak = 0;
+      }
+  }
+  return {maxWinStreak, maxHitStreak}
+  }
+
+  async function handleSetOpenConfig(){
+    
+    var config = { method: 'get', url: `https://apithecataloguer-7f868d31f7a6.herokuapp.com/pairs`, headers: {} };
+    axios(config).then(function (response) {
+      if(response.data.status){
+        setSeletPairs(response.data.pairs)
+        toast.closeAll()
+        toast({ description: "Atualizado", status: 'success', duration: 9000, isClosable: true, })
+      }
+      })
+      .catch(function (error) {
+        setData([])
+      });
+      setModalConfig(true)
+  }
+
+  async function getStrategy(){
+    var config = { method: 'get', url: `https://apithecataloguer-7f868d31f7a6.herokuapp.com/strategy/${pair}/${time.replace('M','')}/${gale.replace('G','')}/${system}`, headers: {} };
+    axios(config).then(function (response) {
+        
+      if(response.data.status){
+        setData(response.data.strategy)
+        toast.closeAll()
+        toast({ description: "Atualizado", status: 'success', duration: 9000, isClosable: true, })
+      }
+      })
+      .catch(function (error) {
+       
+        setData([])
+      });
+  }
+
+
   useEffect(() => {
-    toast({
-      description: "Atualizando...",
-      status: 'info',
-      duration: 9000,
-      isClosable: true,
-    })
-    const getStrategy = async () => {
-      var config = {
-        method: 'get',
-        url: 'https://apigo.herokuapp.com/strategy/' + par + '/' + time + '/' + gale + '/TODOS',
-        headers: {}
-      };
-
-      axios(config)
-        .then(function (response) {
-
-          setData(toJS(response.data.message))
-          toast.closeAll()
-          toast({
-            description: "Atualizado",
-            status: 'success',
-            duration: 9000,
-            isClosable: true,
-          })
-        })
-        .catch(function (error) {
-          setData(JSON.stringify([]))
-        });
-    }
+    toast({ description: "Atualizando...", status: 'info', duration: 9000, isClosable: true, })
     getStrategy()
 
-
   }
-    , [time, gale, par])
+    , [])
 
 
 
@@ -70,58 +106,40 @@ function Home() {
 
           <ModalBody borderRadius='0px 0px 10px 10px' className={styles.box} >
             <Select onChange={(e) => setTime(e.target.value)} value={time} marginTop='20px'>
-              <option value='M1'>M1</option>
-              <option value='M5'>M5</option>
+              <option style={{backgroundColor:'#000323'}} value='M1'>M1</option>
+              <option style={{backgroundColor:'#000323'}} value='M5'>M5</option>
+              <option style={{backgroundColor:'#000323'}} value='M15'>M15</option>
             </Select>
             <Select marginTop='20px' onChange={(e) => setGale(e.target.value)} value={gale}>
-              <option value='FIXA'>FIXA</option>
-              <option value='G1'>G1</option>
-              <option value='G2'>G2</option>
+              <option style={{backgroundColor:'#000323'}} value='G0'>FIXA</option>
+              <option style={{backgroundColor:'#000323'}} value='G1'>G1</option>
+              <option style={{backgroundColor:'#000323'}} value='G2'>G2</option>
             </Select>
-            <Select marginTop='20px' placeholder='Estratégia - Próxima Atualização'>
-              <option value='option1'>Estratégia 1</option>
-              <option value='option2'>Estratégia 2</option>
-              <option value='option3'>Estratégia 3</option>
+            <Select   marginTop='20px' value={system} onChange={(e) => setSystem(e.target.value)}>
+            <option style={{backgroundColor:'#000323'}} value="TODOS">Melhor estratégia</option>
+            <option style={{backgroundColor:'#000323'}} value="MHI">MHI</option>
+            <option style={{backgroundColor:'#000323'}} value="MHI2">MHI2</option>
+            <option style={{backgroundColor:'#000323'}} value="MHI3">MHI3</option>
+            <option style={{backgroundColor:'#000323'}} value="MHI Maioria">MHI Maioria</option>
+            <option style={{backgroundColor:'#000323'}} value="MHI2 Maioria">MHI2 Maioria</option>
+            <option style={{backgroundColor:'#000323'}} value="MHI3 Maioria">MHI3 Maioria</option>
+            <option style={{backgroundColor:'#000323'}} value="Milhão">Milhão</option>
+            <option style={{backgroundColor:'#000323'}} value="Milhão Maioria">Milhão Maioria</option>
+            <option style={{backgroundColor:'#000323'}} value="Melhor de 3">Melhor de 3</option>
+            <option style={{backgroundColor:'#000323'}} value="Padrão 23">Padrão 23</option>
+            <option style={{backgroundColor:'#000323'}} value="Padrão 3x1">Padrão 3x1</option>
+            <option style={{backgroundColor:'#000323'}} value="Padrão Ímpar">Padrão Ímpar</option>
+            <option style={{backgroundColor:'#000323'}} value="Torres Gêmeas">Torres Gêmeas</option>
+            <option style={{backgroundColor:'#000323'}} value="Três Mosqueteiros">Três Mosqueteiros</option>
+            <option style={{backgroundColor:'#000323'}} value="Três Vizinhos">Três Vizinhos</option>
             </Select>
-            <Select marginTop='20px' marginBottom='20px' onChange={(e) => setPar(e.target.value)} value={par}>
-              <option value='TODOS'>TODOS</option>
-             {/*<option value='BTCUSD'>BTCUSD</option>
-              <option value='EOSUSD'>EOSUSD</option>
-              <option value='ETHUSD'>ETHUSD</option>
-              <option value='LTCUSD'>LTCUSD</option>
-  <option value='XRPUSD'>XRPUSD</option>*/}
-              <option value='AUDCAD'>AUDCAD</option>
-              <option value='AUDCAD-OTC'>AUDCAD-OTC</option>
-              <option value='AUDJPY'>AUDJPY</option>
-              <option value='AUDNZD'>AUDNZD</option>
-              <option value='AUDUSD'>AUDUSD</option>
-              <option value='EURAUD'>EURAUD</option>
-              <option value='EURCAD'>EURCAD</option>
-              <option value='EURGBP'>EURGBP</option>
-              <option value='EURGBP-OTC'>EURGBP-OTC</option>
-              <option value='EURJPY'>EURJPY</option>
-              <option value='EURJPY-OTC'>EURJPY-OTC</option>
-              <option value='EURUSD'>EURUSD</option>
-              <option value='EURUSD-OTC'>EURUSD-OTC</option>
-              <option value='GBPAUD'>GBPAUD</option>
-              <option value='GBPCAD'>GBPCAD</option>
-              <option value='GBPJPY'>GBPJPY</option>
-              <option value='GBPJPY-OTC'>GBPJPY-OTC</option>
-              <option value='GBPNZD'>GBPNZD</option>
-              <option value='GBPUSD'>GBPUSD</option>
-              <option value='GBPUSD-OTC'>GBPUSD-OTC</option>
-              <option value='NZDUSD'>NZDUSD</option>
-              <option value='NZDUSD-OTC'>NZDUSD-OTC</option>
-              <option value='USDCAD'>USDCAD</option>
-              <option value='USDCHF'>USDCHF</option>
-              <option value='USDCHF-OTC'>USDCHF-OTC</option>
-              <option value='USDHKD-OTC'>USDHKD-OTC</option>
-              <option value='USDINR-OTC'>USDINR-OTC</option>
-              <option value='USDJPY'>USDJPY</option>
-              <option value='USDJPY-OTC'>USDJPY-OTC</option>
-              <option value='USDSGD-OTC'>USDSGD-OTC</option>
-              <option value='USDZAR-OTC'>USDZAR-OTC</option>
+            <Select marginTop='20px' marginBottom='20px' onChange={(e) => setPar(e.target.value)} value={pair}>
+              <option key={12121} value='TODOS'>TODOS</option>
+            {selectPairs.map((p, i) =>  (<option style={{backgroundColor:'#000323'}} key={i} value={p}>{p}</option>))}
             </Select>
+<Center>
+            <Button mb='30px' colorScheme='twitter' onClick={getStrategy}  >Pesquisar</Button>
+            </Center>
           </ModalBody>
 
 
@@ -131,7 +149,7 @@ function Home() {
 
         <Center marginBottom='20px' borderRadius='0px 0px 20px 20px' bg={'#000323'} className={styles.box} w='100%' h='55px' justifyContent={'space-between'}>
           <Center     >
-            <Link w='65px' marginLeft={'5px'} href='https://t.me/ProgamadorReact' isExternal>
+            <Link w='65px' marginLeft={'5px'} href='https://t.me/reactdavicastro' isExternal>
               <Button size='xs' w='65px' colorScheme='twitter' leftIcon={<FaTelegram />}>
 
                 Dev </Button>
@@ -145,30 +163,35 @@ function Home() {
 
           </Center>
           <Center  >
-            <Link href='https://t.me/neoncatalogador' w='65px' isExternal> <Button w='65px' size='xs' colorScheme='twitter' leftIcon={<FaTelegram />}>
+            <Link href='https://t.me/+XSeYsgGkEblmODVh' w='65px' isExternal> <Button w='65px' size='xs' colorScheme='twitter' leftIcon={<FaTelegram />}>
               Grupo</Button>
             </Link>
           </Center>
 
         </Center>
+        <Center flexDir={'column'} fontSize={'sm'} fontWeight={'bold'} color='blue.300'> 
+        <Text>PARCERIA COM  </Text>
+        <Link marginBottom={'10px'} href=' https://t.me/+RNhOqAbXil1hYjg5' isExternal>
+         
+        <Image borderRadius='25px' w='90px' src={'https://i.imgur.com/Towqk9b.png'} alt='da'/></Link></Center>
         <Center>
-          <Center margin={'10px 0px 20px 0px'} borderRadius='0px 0px 20px 20px' w='100%' h='50px'>
+          <Center margin={'10px 0px 20px 40px'} borderRadius='0px 0px 20px 20px' w='100%' h='50px'>
             <Wrap justify={'center'}  >
               <WrapItem>
                 <Center margin={'8px'} flexDir={'row'}>
-                  <> <Quadrant value={'w'} /><Heading w='100px' fontWeight={'600'} marginLeft='5px' fontSize={'18px'}>WIN</Heading>
+                  <> <Quadrant value={'W'} /><Heading w='100px' fontWeight={'600'} marginLeft='5px' fontSize={'18px'}>WIN</Heading>
                   </>
                 </Center>
               </WrapItem>
               <WrapItem>
                 <Center margin={'8px'} flexDir={'row'}>
-                  <> <Quadrant value={'w1'} /><Heading w='100px' fontWeight={'600'} marginLeft='5px' fontSize={'18px'}>WIN G1</Heading>
+                  <> <Quadrant value={'G1'} /><Heading w='100px' fontWeight={'600'} marginLeft='5px' fontSize={'18px'}>WIN G1</Heading>
                   </>
                 </Center>
               </WrapItem>
               <WrapItem>
                 <Center margin={'8px'} flexDir={'row'}>
-                  <> <Quadrant value={'w2'} /><Heading w='100px' fontWeight={'600'} marginLeft='5px' fontSize={'18px'}>WIN G2</Heading>
+                  <> <Quadrant value={'G2'} /><Heading w='100px' fontWeight={'600'} marginLeft='5px' fontSize={'18px'}>WIN G2</Heading>
                   </>
                 </Center>
               </WrapItem>
@@ -176,7 +199,7 @@ function Home() {
                 <Center margin={'8px'} flexDir={'row'}>
 
                   <>
-                    <Quadrant value={'l'} /><Heading w='100px' fontWeight={'600'} marginLeft='5px' fontSize={'18px'}>LOSS</Heading>
+                    <Quadrant value={'H'} /><Heading w='100px' fontWeight={'600'} marginLeft='5px' fontSize={'18px'}>LOSS</Heading>
                   </>
                 </Center>
               </WrapItem>
@@ -188,8 +211,9 @@ function Home() {
         <Center>
           <Center margin={'0px 0px 20px 0px'} borderRadius='0px 0px 20px 20px' w='100%'>
             <Heading w='100px' fontWeight={'600'} marginLeft='5px' fontSize={'18px'}>{time} - {gale}</Heading>
+            
             <Box bg='white' borderRadius={'20px'} >
-              <IconButton borderRadius={'20px'} className={styles.boxicon} aria-label='Search database' onClick={() => setModalConfig(!modalConfig)} icon={<AiTwotoneSetting color='#050D29' size='40px' />} />
+              <IconButton borderRadius={'20px'} className={styles.boxicon} aria-label='Search database' onClick={handleSetOpenConfig} icon={<AiTwotoneSetting color='#050D29' size='40px' />} />
             </Box>
           </Center>
         </Center>
@@ -198,6 +222,16 @@ function Home() {
           <Link w='290px' marginLeft={'5px'} marginBottom={'10px'} href='https://t.me/invistastrategy_bot' isExternal>
             <Button className={styles.boxicon} size='lg' w='300px' colorScheme='twitter' rightIcon={<FaTelegram size={30} />} leftIcon={<FaRobot size={30} />}>
               AUTIMATIZAR VIA BOT </Button>
+          </Link>
+
+          
+        </Center>
+        <Center      >
+         
+          <Link w='290px' marginLeft={'5px'} marginBottom={'10px'} href=' https://t.me/+RNhOqAbXil1hYjg5' isExternal>
+            <Button className={styles.boxicon} size='lg' w='300px' colorScheme='twitter' rightIcon={<FaTelegram size={30} />} leftIcon={<FaRobot size={30} />}>
+              
+                LISTAS VIP PREMIUM</Button>
           </Link>
 
           
@@ -222,48 +256,48 @@ function Home() {
                     <Card color='white' align='center' w='100%' h='100%' bg='#000323'>
                       <CardHeader >
                         <Center flexDir={'column'}>
-                          <Heading fontWeight={'700'} fontSize={'20px'}>{toJS(item.strategy).nameStrategy}</Heading>
-                          <Heading marginTop='10px' marginBottom='10px' fontWeight={'500'} fontSize={'16px'}>{toJS(item.strategy).pairStrategy} - {toJS(item.strategy).assertivenessStrategy}</Heading>
+                          <Heading fontWeight={'700'} fontSize={'20px'}>{item.estrategia.toUpperCase()}</Heading>
+                          <Heading marginTop='10px' marginBottom='10px' fontWeight={'500'} fontSize={'16px'}>{item.ativo} - {item.winrate}%</Heading>
                           <Wrap spacing='5px'>
+                          {item.quadrantes.filter(x => x === "W").length > 0 &&
+                          <WrapItem>
+                              <Box margin={'8px'}>
+                                <Heading w='25px' fontWeight={'600'} fontSize={'13px'}>{item.quadrantes.filter(x => x === "W").length}</Heading>
+                                    <Quadrant value={'W'} />
+                              </Box>
+                            </WrapItem>
+                            }
+                            {item.quadrantes.filter(x => x === "G1").length > 0 &&
                             <WrapItem>
                               <Box margin={'8px'}>
-                                {toJS(item.strategy).resumeAssertivenessStrategy[0] !== undefined &&
-                                  <><Heading w='25px' fontWeight={'600'} fontSize={'13px'}>{toJS(item.strategy).resumeAssertivenessStrategy[0]}</Heading>
-                                    <Quadrant value={'w'} />
+                                <Heading w='25px' fontWeight={'600'} fontSize={'13px'}>{item.quadrantes.filter(x => x === "G1").length}</Heading>
+                                    <Quadrant value={'G1'} />
+                              </Box>
+                            </WrapItem>
+                            }
+                            {item.quadrantes.filter(x => x === "G2").length > 0 &&
+                            <WrapItem>
+                              <Box margin={'8px'}>
+                               <Heading w='25px' fontWeight={'600'} fontSize={'13px'}>{item.quadrantes.filter(x => x === "G2").length}</Heading>
+                                    <Quadrant value={'G2'} />
+                                
+                              </Box>
+                            </WrapItem>
+                              }
+                            <WrapItem>
+                              <Box margin={'8px'}>
+                                {item.quadrantes.filter(x => x === "H").length > 0 &&
+                                  <><Heading w='25px' fontWeight={'600'} fontSize={'13px'}>{item.quadrantes.filter(x => x === "H").length}</Heading>
+                                    <Quadrant value={'H'} />
                                   </>}
                               </Box>
                             </WrapItem>
-                            <WrapItem>
-                              <Box margin={'8px'}>
-                                {toJS(item.strategy).resumeAssertivenessStrategy[1] !== undefined &&
-                                  <><Heading w='25px' fontWeight={'600'} fontSize={'13px'}>{toJS(item.strategy).resumeAssertivenessStrategy[1]}</Heading>
-                                    <Quadrant value={'w1'} />
-                                  </>}
-                              </Box>
-                            </WrapItem>
-                            {toJS(item.strategy).resumeAssertivenessStrategy[2] !== undefined && <WrapItem>
-                              <Box margin={'8px'}>
 
-                                <><Heading w='25px' fontWeight={'600'} fontSize={'13px'}>{toJS(item.strategy).resumeAssertivenessStrategy[2]}</Heading>
-                                  <Quadrant value={toJS(item.strategy).resumeAssertivenessStrategy[2] !== undefined ? 'w2' : 'l'} />
-                                </>
-                              </Box>
-                            </WrapItem>}
-                            {toJS(item.strategy).resumeAssertivenessStrategy[3] !== undefined &&
-                              <WrapItem>
-                                <Box margin={'8px'}>
-
-                                  <><Heading w='25px' fontWeight={'600'} fontSize={'13px'}>{toJS(item.strategy).resumeAssertivenessStrategy[3]}</Heading>
-                                    <Quadrant value={'l'} />
-                                  </>
-                                </Box>
-                              </WrapItem>}
-
-                          </Wrap>
+                            </Wrap>
                         </Center>
 
                         <Wrap spacing='5.5px' marginTop='20px'>
-                          {toJS(toJS(item.strategy).detailAssertivenessStrategy).map((item, index) => (
+                          {item.quadrantes.map((item, index) => (
                             <WrapItem key={index}>
                               <Box key={index} margin={'6px'}>
                                 <Quadrant value={item} />
@@ -274,26 +308,26 @@ function Home() {
                           <WrapItem>
                             <Center margin='5px' flexDir={'row'}>
                               <Quadrant value={'w'} />
-                              <Heading marginLeft='5px' fontWeight={'700'} fontSize={'17px'}>Wins Sucessivos: {toJS(item.strategy).winsSuccessiveStrategy}</Heading>
+                              <Heading marginLeft='5px' fontWeight={'700'} fontSize={'17px'}>Wins Sucessivos: {getWL(item.quadrantes).maxWinStreak}</Heading>
                             </Center>
 
                           </WrapItem>
                           <WrapItem>
                             <Center marginLeft='5px' flexDir={'row'}>
                               <Quadrant value={'l'} />
-                              <Heading marginLeft='5px' fontWeight={'700'} fontSize={'17px'}>Losses Sucessivos: {toJS(item.strategy).lossSuccessiveStrategy}</Heading>
+                              <Heading marginLeft='5px' fontWeight={'700'} fontSize={'17px'}>Losses Sucessivos:  {getWL(item.quadrantes).maxHitStreak}</Heading>
                             </Center>
 
                           </WrapItem>
                         </Wrap>
 
                       </CardHeader>
-                      <CardFooter>
+                      {/*<CardFooter>
                         <Center flexDir={'column'}>
                           <Button display={'none'} colorScheme='blue'>View here</Button>
-                          <Heading marginBottom='5px' fontWeight={'300'} fontSize={'15px'}>Última Análise: {toJS(item.strategy).timeAssertivenessStrategy}</Heading>
+                          <Heading marginBottom='5px' fontWeight={'300'} fontSize={'15px'}>Última Análise: {''}</Heading>
                         </Center>
-                      </CardFooter>
+                          </CardFooter>*/}
                     </Card>
                   </Center>
                 </WrapItem>
@@ -316,18 +350,12 @@ function Home() {
 
                 <WrapItem>
 
-                  <Link href='https://www.instagram.com/invistatrading/' isExternal><Button w='300px' colorScheme='facebook' leftIcon={<FaInstagram />}>
+                  <Link href='https://www.instagram.com/dev.castrodavi/' isExternal><Button w='300px' colorScheme='facebook' leftIcon={<FaInstagram />}>
                     Instagram  </Button>
                   </Link>
                 </WrapItem>
-                <WrapItem>
-
-                  <Link href='https://t.me/invistacomsabedoria' isExternal> <Button w='300px' colorScheme='twitter' leftIcon={<FaTelegram />}>
-                    Telegram Grupo</Button>
-                  </Link>
-
-                </WrapItem>
-                <WrapItem><Link href='https://t.me/ProgamadorReact' isExternal>
+               
+                <WrapItem><Link href='https://t.me/reactdavicastro' isExternal>
                   <Button w='300px' colorScheme='twitter' leftIcon={<FaTelegram />}>
 
                     Telegram Desenvolvedor </Button>
@@ -370,13 +398,4 @@ na opção Telegram Desenvolvedor.</Text>
 }
 
 
-export default observer(Home)
-
-
-//
-//export const getServerSideProps = canSSRGuest(async (ctx) => {
-//  
-//  return {
-//    props: {}
-//  }
-//})
+export default Home
