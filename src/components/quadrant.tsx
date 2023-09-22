@@ -28,6 +28,12 @@ export default function Quadrant({value }): JSX.Element {
          <Box    h='5px' w='5px' > </Box>
          </Center>
     }
+    {value === 'D' &&
+         <Center  borderRadius={'4px'} bg='#f5f5f5' className={styles.boxorange}>
+        
+         <Box    h='5px' w='5px' > </Box>
+         </Center>
+    }
     
     </>
     )

@@ -32,6 +32,17 @@
             inset 0 0 0.1rem #51ff00; 
 }
 
+.boxgreen { 
+  border: 0.1rem solid #fff;
+  padding: 0.4em;
+  box-shadow: 0 0 .1rem #606160,
+            0 0 .1rem #606160,
+            0 0 1.2rem #ffffff,
+            0 0 0.1rem #ffffff,
+            0 0 0.8rem #ffffff,
+            inset 0 0 0.1rem #ffffff; 
+}
+
 
 
 .boxorange { 
