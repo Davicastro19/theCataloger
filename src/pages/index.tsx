@@ -186,6 +186,12 @@ function Home() {
         <Center>
           <Center margin={'10px 0px 20px 40px'} borderRadius='0px 0px 20px 20px' w='100%' h='50px'>
             <Wrap justify={'center'}  >
+            <WrapItem>
+                <Center margin={'8px'} flexDir={'row'}>
+                  <> <Quadrant value={'D'} /><Heading w='100px' fontWeight={'600'} marginLeft='5px' fontSize={'18px'}>DOJI</Heading>
+                  </>
+                </Center>
+              </WrapItem>
               <WrapItem>
                 <Center margin={'8px'} flexDir={'row'}>
                   <> <Quadrant value={'W'} /><Heading w='100px' fontWeight={'600'} marginLeft='5px' fontSize={'18px'}>WIN</Heading>
@@ -292,6 +298,15 @@ function Home() {
                                 <Box margin={'8px'}>
                                   <Heading w='25px' fontWeight={'600'} fontSize={'13px'}>{item.quadrantes.filter(x => x === "G2").length}</Heading>
                                   <Quadrant value={'G2'} />
+
+                                </Box>
+                              </WrapItem>
+                            }
+                            {item.quadrantes.filter(x => x === "D").length > 0 &&
+                              <WrapItem>
+                                <Box margin={'8px'}>
+                                  <Heading w='25px' fontWeight={'600'} fontSize={'13px'}>{item.quadrantes.filter(x => x === "D").length}</Heading>
+                                  <Quadrant value={'D'} />
 
                                 </Box>
                               </WrapItem>

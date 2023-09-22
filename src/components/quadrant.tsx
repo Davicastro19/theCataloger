@@ -29,7 +29,7 @@ export default function Quadrant({value }): JSX.Element {
          </Center>
     }
     {value === 'D' &&
-         <Center  borderRadius={'4px'} bg='#f5f5f5' className={styles.boxorange}>
+         <Center  borderRadius={'4px'} bg='#f5f5f5' className={styles.boxdoj}>
         
          <Box    h='5px' w='5px' > </Box>
          </Center>
