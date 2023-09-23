@@ -28,7 +28,7 @@ export default function CatalogerS(){
       let continueLoop = true
       while (continueLoop) {
        // await getGatalog(id);
-        var config = { method: 'get', url: `http://127.0.0.1:8000/getCatalog/${id}`, headers: {} };
+        var config = { method: 'get', url: `https://apithecataloguer-7f868d31f7a6.herokuapp.com/getCatalog/${id}`, headers: {} };
       axios(config).then(function (response) {
         if (response.data.status) {
           if (typeof response.data.catalog === 'number'){
@@ -82,7 +82,7 @@ export default function CatalogerS(){
         }else{
             delete object.rates["g2"]
         }
-        var config = { method: 'post', url: `http://127.0.0.1:8000/catalog`, headers: { 'Content-Type': 'application/json' }, data : object };
+        var config = { method: 'post', url: `https://apithecataloguer-7f868d31f7a6.herokuapp.com/catalog`, headers: { 'Content-Type': 'application/json' }, data : object };
         await axios(config).then(function (response) {
     
                 if (response.data.status) {
