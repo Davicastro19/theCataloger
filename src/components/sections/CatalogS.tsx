@@ -21,7 +21,38 @@ export default function CatalogerS(){
     const [filter, setFilter] = useState(false)
     const [signal, setSignals] = useState('')
     const [loading, setLoading] = useState(false)
+    const [percent, setPercent] = useState(0)
     
+
+    async function initiateLoop(id) {
+      let continueLoop = true
+      while (continueLoop) {
+       // await getGatalog(id);
+        var config = { method: 'get', url: `http://127.0.0.1:8000/getCatalog/${id}`, headers: {} };
+      axios(config).then(function (response) {
+        if (response.data.status) {
+          if (typeof response.data.catalog === 'number'){
+            setPercent(response.data.catalog)
+          }else if(typeof response.data.catalog === 'string'){
+            setSignals(response.data.catalog)
+          }else{
+            setSignals(response.data.catalog.join('\n'))
+            continueLoop = false
+        }
+          //setData(response.data.strategy)
+          //toast.closeAll()
+          //toast({ description: "Atualizado", status: 'success', duration: 9000, isClosable: true, })
+        }
+      })
+        .catch(function (error) {
+  
+          //setData([])
+        });
+        await new Promise(resolve => setTimeout(resolve, 2000));
+      }
+      setLoading(false)
+    }
+  
     
     
     async function handleSubmit(){
@@ -51,15 +82,16 @@ export default function CatalogerS(){
         }else{
             delete object.rates["g2"]
         }
-        var config = { method: 'post', url: `https://apithecataloguer-7f868d31f7a6.herokuapp.com/catalog`, headers: { 'Content-Type': 'application/json' }, data : object };
+        var config = { method: 'post', url: `http://127.0.0.1:8000/catalog`, headers: { 'Content-Type': 'application/json' }, data : object };
         await axios(config).then(function (response) {
     
                 if (response.data.status) {
-                    if (typeof response.data.catalog === 'string'){
-                        setSignals(response.data.catalog)
-                    }else{
-                        setSignals(response.data.catalog.join('\n'))
-                    }
+                  initiateLoop(response.data.id)
+                    //if (typeof response.data.catalog === 'string'){
+                    //    setSignals(response.data.catalog)
+                    //}else{
+                    //    setSignals(response.data.catalog.join('\n'))
+                    //}
                 }else{
 
                 }
@@ -68,7 +100,7 @@ export default function CatalogerS(){
                 //toast({ description: "Atualizado", status: 'success', duration: 9000, isClosable: true, })
           
           })
-          setLoading(false)
+
         }
         
     
@@ -179,13 +211,13 @@ export default function CatalogerS(){
           <ModalBody >
           {!loading ? 
 
-(  <Text textAlign={'center'} whiteSpace={'pre-line'}>{signal}</Text>):( <Center><Spinner
+(  <Text textAlign={'center'} whiteSpace={'pre-line'}>{signal}</Text>):( <Center flexDir={'column'}><Spinner
     thickness='4px'
     speed='0.65s'
     emptyColor='gray.200'
     color='blue.500'
     size='xl'
-  /></Center>)
+  ></Spinner><Text fontWeight={'600'} fontSize={'md'}>{percent}%</Text></Center>)
 }
           </ModalBody>
 
