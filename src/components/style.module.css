@@ -5,8 +5,6 @@
   box-shadow: 0 0 .1rem #fff,
             0 0 .1rem #fff,
             0 0 1.2rem #fe1313,
-            0 0 0.1rem #fe1313,
-            0 0 0.8rem #fe1313,
             inset 0 0 0.1rem #fe1313; 
 }
 .neonBox {
@@ -27,8 +25,6 @@
   box-shadow: 0 0 .1rem #ffffff,
             0 0 .1rem #fff,
             0 0 1.2rem #51ff00,
-            0 0 0.1rem #51ff00,
-            0 0 0.8rem #51ff00,
             inset 0 0 0.1rem #51ff00; 
 }
 
@@ -38,8 +34,6 @@
   box-shadow: 0 0 .1rem #606160,
             0 0 .1rem #606160,
             0 0 1.2rem #ffffff,
-            0 0 0.1rem #ffffff,
-            0 0 0.8rem #ffffff,
             inset 0 0 0.1rem #ffffff; 
 }
 
@@ -51,8 +45,6 @@
   box-shadow: 0 0 .1rem #fff,
             0 0 .1rem #fff,
             0 0 1.2rem #ff6321,
-            0 0 0.1rem #ff6321,
-            0 0 0.8rem #ff6321,
             inset 0 0 0.1rem #ff6321; 
 }
 
@@ -62,7 +54,5 @@
   box-shadow: 0 0 .1rem #fff,
             0 0 .1rem #fff,
             0 0 1.2rem #ffff00,
-            0 0 0.1rem #ffff00,
-            0 0 0.8rem #ffff00,
             inset 0 0 0.1rem #ffff00; 
 }

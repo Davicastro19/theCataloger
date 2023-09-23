@@ -3,8 +3,8 @@
   border: 0.1rem solid #000323;
   padding: 0.4em;
   box-shadow: 0 0 .1rem #fff,
-              0 0 .1rem #fff,
-              0 0 0.1rem #13bbfe,
+            0 0 .1rem #fff,
+            0 0 0.1rem #13bbfe,
               0 0 0.1rem #13bbfe,
             0 0 0.8rem #13bbfe,
             inset 0 0 0.1rem #13bbfe; 
@@ -78,7 +78,7 @@
   box-shadow: 0 0 .1rem #fff,
             0 0 .1rem #fff,
             0 0 0.1rem #13bbfe,
-            0 0 0.1rem #13bbfe,
+              0 0 0.1rem #13bbfe,
             0 0 0.8rem #13bbfe,
             inset 0 0 0.1rem #13bbfe; 
 }

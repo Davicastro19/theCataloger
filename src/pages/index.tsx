@@ -1,4 +1,4 @@
-import { Box, Button, Card, CardBody, Image, CardFooter, CardHeader, Center, Heading, Wrap, WrapItem, Text, IconButton, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Select, useToast, HStack, Link } from '@chakra-ui/react';
+import { Box, Button, Card, CardBody, Image, CardFooter, CardHeader, Center, Heading, Wrap, WrapItem, Text, IconButton, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Select as SelectI, useToast, HStack, Link, useDisclosure, FormControl, FormLabel, VStack, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Checkbox } from '@chakra-ui/react';
 import { observer } from 'mobx-react';
 import styles from './style.module.css';
 import React, { useEffect, useState } from 'react';
@@ -8,7 +8,9 @@ import Quadrant from '../components/quadrant';
 import { AiTwotoneSetting } from 'react-icons/ai';
 import { FaInstagram, FaRobot, FaTelegram } from 'react-icons/fa';
 import Head from "next/head";
+import Header from '../components/header/Header'
 
+import CatalogerS from '../components/sections/CatalogS';
 
 
 function Home() {
@@ -20,6 +22,15 @@ function Home() {
   const [system, setSystem] = useState('TODOS')
   const [modalConfig, setModalConfig] = useState(false)
   const toast = useToast()
+  const [isOpenMenu, onCloseMenu] = useState(true)
+  const [section, setSection] = useState('CATALOGAESTRA')
+  const [isOpen, onClose] = useState(true)
+  
+
+
+
+
+
 
   function getWL(lista: any) {
 
@@ -83,7 +94,7 @@ function Home() {
 
         setData([])
       });
-      setModalConfig(false)
+    setModalConfig(false)
   }
 
 
@@ -114,17 +125,17 @@ function Home() {
           <ModalHeader borderRadius='10px 10px 0px 0px' className={styles.box}>Configurações  <ModalCloseButton /></ModalHeader>
 
           <ModalBody borderRadius='0px 0px 10px 10px' className={styles.box} >
-            <Select onChange={(e) => setTime(e.target.value)} value={time} marginTop='20px'>
+            <SelectI onChange={(e) => setTime(e.target.value)} value={time} marginTop='20px'>
               <option style={{ backgroundColor: '#000323' }} value='M1'>M1</option>
               <option style={{ backgroundColor: '#000323' }} value='M5'>M5</option>
               <option style={{ backgroundColor: '#000323' }} value='M15'>M15</option>
-            </Select>
-            <Select marginTop='20px' onChange={(e) => setGale(e.target.value)} value={gale}>
+            </SelectI>
+            <SelectI marginTop='20px' onChange={(e) => setGale(e.target.value)} value={gale}>
               <option style={{ backgroundColor: '#000323' }} value='G0'>FIXA</option>
               <option style={{ backgroundColor: '#000323' }} value='G1'>G1</option>
               <option style={{ backgroundColor: '#000323' }} value='G2'>G2</option>
-            </Select>
-            <Select marginTop='20px' value={system} onChange={(e) => setSystem(e.target.value)}>
+            </SelectI>
+            <SelectI marginTop='20px' value={system} onChange={(e) => setSystem(e.target.value)}>
               <option style={{ backgroundColor: '#000323' }} value="TODOS">Melhor estratégia</option>
               <option style={{ backgroundColor: '#000323' }} value="MHI">MHI</option>
               <option style={{ backgroundColor: '#000323' }} value="MHI2">MHI2</option>
@@ -141,11 +152,11 @@ function Home() {
               <option style={{ backgroundColor: '#000323' }} value="Torres Gêmeas">Torres Gêmeas</option>
               <option style={{ backgroundColor: '#000323' }} value="Três Mosqueteiros">Três Mosqueteiros</option>
               <option style={{ backgroundColor: '#000323' }} value="Três Vizinhos">Três Vizinhos</option>
-            </Select>
-            <Select marginTop='20px' marginBottom='20px' onChange={(e) => setPar(e.target.value)} value={pair}>
+            </SelectI>
+            <SelectI marginTop='20px' marginBottom='20px' onChange={(e) => setPar(e.target.value)} value={pair}>
               <option key={12121} value='TODOS'>TODOS</option>
               {selectPairs.map((p, i) => (<option style={{ backgroundColor: '#000323' }} key={i} value={p}>{p}</option>))}
-            </Select>
+            </SelectI>
             <Center>
               <Button mb='30px' colorScheme='twitter' onClick={getStrategy}  >Pesquisar</Button>
             </Center>
@@ -154,86 +165,41 @@ function Home() {
 
         </ModalContent>
       </Modal>
+
+
+      <Modal isOpen={isOpen} onClose={() => onClose(false)}>
+        <ModalOverlay />
+        <ModalContent bg='#000323'>
+          <ModalHeader borderRadius='10px 10px 0px 0px' className={styles.box}>IMPORTANTE  <ModalCloseButton /></ModalHeader>
+
+          <ModalBody borderRadius='0px 0px 10px 10px' className={styles.box} >
+            <Box marginTop='20px' marginLeft='10px' flexDir={'column'} display={'flex'} >
+
+              <Text marginTop={'1px'} fontWeight={'500'} fontSize={'20px'} color='white'>
+                AJUDE A MANTER A NOSSA FERRAMENTA VIVA E EM CONSTANTE EVOLUÇÃO</Text>
+
+              <Text marginTop={'1px'} fontWeight={'500'} fontSize={'20px'} mt='20px' color='white'>
+                SUA CONTRIBUIÇÃO FAZ A DIFERENÇA! AJUDE-NOS A CONTINUAR OFERECENDO UM SERVIÇO DE ALTA QUALIDADE E GRATUITO.</Text>
+              <Text marginTop={'1px'} fontWeight={'500'} fontSize={'20px'} mt='20px' color='white'>
+                FAÇA SUA DOAÇÃO AGORA VIA PIX - EMAIL: davi18827@gmail.com (C6 BANK)</Text>
+              <Text marginTop={'1px'} fontWeight={'500'} fontSize={'20px'} mt='20px' color='white'>
+                TEM SUGESTÕES DE MELHORIA? SUA OPINIÃO É VALIOSA! ENTRE EM CONTATO CONOSCO ATRAVÉS DO TELEGRAM DESENVOLVEDOR.</Text>
+
+
+              <Text marginTop={'1px'} fontWeight={'500'} fontSize={'20px'} mt='20px' mb='20px' color='white'>
+                JUNTOS, PODEMOS TORNAR ESTA FERRAMENTA AINDA MELHOR!</Text>
+            </Box>
+          </ModalBody>
+
+
+        </ModalContent>
+      </Modal>
+
+
       <Box padding={'0 0rem'}>
 
-        <Center marginBottom='20px' borderRadius='0px 0px 20px 20px' bg={'#000323'} className={styles.box} w='100%' h='55px' justifyContent={'space-between'}>
-          <Center     >
-            <Link w='65px' marginLeft={'5px'} href='https://t.me/reactdavicastro' isExternal>
-              <Button size='xs' w='65px' colorScheme='twitter' leftIcon={<FaTelegram />}>
-
-                Dev </Button>
-            </Link>
-
-
-          </Center>
-          <Center flexDir='column' h='55px' >
-            <Text marginRight='1px' className={styles.neonText} color={'#13bbfe'} fontSize={'35px'} fontWeight={'300'} h='30px'>NEON</Text>
-            <Text marginRight='1px' className={styles.invistaText} color={'#ffb300'} fontSize={'20px'} fontWeight={'300'} marginTop={'5px'}>INVISTA</Text>
-
-          </Center>
-          <Center  >
-            <Link href='https://t.me/+XSeYsgGkEblmODVh' w='65px' isExternal> <Button w='65px' size='xs' colorScheme='twitter' leftIcon={<FaTelegram />}>
-              Grupo</Button>
-            </Link>
-          </Center>
-
-        </Center>
-        <Center flexDir={'column'} fontSize={'sm'} fontWeight={'bold'} color='blue.300'>
-          <Text>PARCERIA COM  </Text>
-          <Link marginBottom={'10px'} href=' https://t.me/+RNhOqAbXil1hYjg5' isExternal>
-
-            <Image borderRadius='25px' w='90px' src={'https://i.imgur.com/Towqk9b.png'} alt='da' /></Link></Center>
-        <Center>
-          <Center margin={'10px 0px 20px 40px'} borderRadius='0px 0px 20px 20px' w='100%' h='50px'>
-            <Wrap justify={'center'}  >
-            <WrapItem>
-                <Center margin={'8px'} flexDir={'row'}>
-                  <> <Quadrant value={'D'} /><Heading w='100px' fontWeight={'600'} marginLeft='5px' fontSize={'18px'}>DOJI</Heading>
-                  </>
-                </Center>
-              </WrapItem>
-              <WrapItem>
-                <Center margin={'8px'} flexDir={'row'}>
-                  <> <Quadrant value={'W'} /><Heading w='100px' fontWeight={'600'} marginLeft='5px' fontSize={'18px'}>WIN</Heading>
-                  </>
-                </Center>
-              </WrapItem>
-              <WrapItem>
-                <Center margin={'8px'} flexDir={'row'}>
-                  <> <Quadrant value={'G1'} /><Heading w='100px' fontWeight={'600'} marginLeft='5px' fontSize={'18px'}>WIN G1</Heading>
-                  </>
-                </Center>
-              </WrapItem>
-              <WrapItem>
-                <Center margin={'8px'} flexDir={'row'}>
-                  <> <Quadrant value={'G2'} /><Heading w='100px' fontWeight={'600'} marginLeft='5px' fontSize={'18px'}>WIN G2</Heading>
-                  </>
-                </Center>
-              </WrapItem>
-              <WrapItem>
-                <Center margin={'8px'} flexDir={'row'}>
-
-                  <>
-                    <Quadrant value={'H'} /><Heading w='100px' fontWeight={'600'} marginLeft='5px' fontSize={'18px'}>LOSS</Heading>
-                  </>
-                </Center>
-              </WrapItem>
-
-            </Wrap>
-
-          </Center>
-        </Center>
-        <Center>
-          <Center margin={'0px 0px 20px 0px'} borderRadius='0px 0px 20px 20px' w='100%'>
-            <Heading w='100px' fontWeight={'600'} marginLeft='5px' fontSize={'18px'}>{time} - {gale}</Heading>
-
-            <Box bg='white' borderRadius={'20px'} >
-              <IconButton borderRadius={'20px'} className={styles.boxicon} aria-label='Search database' onClick={handleSetOpenConfig} icon={<AiTwotoneSetting color='#050D29' size='40px' />} />
-            </Box>
-          </Center>
-        </Center>
-        <Center>
-        <HStack flexDir={['column', 'row']}>
+        <Header onClose={onCloseMenu} isOpen={isOpenMenu} setSection={setSection} section={section} />
+        <HStack justify={'center'} flexDir={['column', 'row']} h='30%'>
           <Center      >
             <Link w='290px' marginLeft={'5px'} marginBottom={'10px'} href='https://t.me/invistastrategy_bot' isExternal>
               <Button className={styles.boxicon} size='lg' w='300px' colorScheme='twitter' rightIcon={<FaTelegram size={30} />} leftIcon={<FaRobot size={30} />}>
@@ -260,109 +226,172 @@ function Home() {
 
 
           </Center>
+         
         </HStack>
-        </Center>
+        {section === 'CATALOGAESTRA' &&
+          <>
+            <Center>
+              <Center margin={'10px 0px 20px 40px'} borderRadius='0px 0px 20px 20px' w='100%' h='30%'>
+                <Wrap justify={'center'}  >
+                  <WrapItem>
+                    <Center margin={'8px'} flexDir={'row'}>
+                      <> <Quadrant value={'D'} /><Heading w='100px' fontWeight={'600'} marginLeft='5px' fontSize={'18px'}>DOJI</Heading>
+                      </>
+                    </Center>
+                  </WrapItem>
+                  <WrapItem>
+                    <Center margin={'8px'} flexDir={'row'}>
+                      <> <Quadrant value={'W'} /><Heading w='100px' fontWeight={'600'} marginLeft='5px' fontSize={'18px'}>WIN</Heading>
+                      </>
+                    </Center>
+                  </WrapItem>
+                  <WrapItem>
+                    <Center margin={'8px'} flexDir={'row'}>
+                      <> <Quadrant value={'G1'} /><Heading w='100px' fontWeight={'600'} marginLeft='5px' fontSize={'18px'}>WIN G1</Heading>
+                      </>
+                    </Center>
+                  </WrapItem>
+                  <WrapItem>
+                    <Center margin={'8px'} flexDir={'row'}>
+                      <> <Quadrant value={'G2'} /><Heading w='100px' fontWeight={'600'} marginLeft='5px' fontSize={'18px'}>WIN G2</Heading>
+                      </>
+                    </Center>
+                  </WrapItem>
+                  <WrapItem>
+                    <Center margin={'8px'} flexDir={'row'}>
 
-        <Center w='100%' >
+                      <>
+                        <Quadrant value={'H'} /><Heading w='100px' fontWeight={'600'} marginLeft='5px' fontSize={'18px'}>LOSS</Heading>
+                      </>
+                    </Center>
+                  </WrapItem>
 
-          {data.length > 0 &&
-            <Wrap spacing='15px' justify='center' bg='#000' marginBottom={'10px'}>
+                </Wrap>
 
-              {data.map((item, index) => (
-                <WrapItem key={index} >
-                  <Center margin={'15px 10px 20px 10px'} bg='#000323' w='280px' h='495px' borderRadius={'10px'} className={styles.neonBox}>
-                    <Card color='white' align='center' w='100%' h='100%' bg='#000323'>
-                      <CardHeader >
-                        <Center flexDir={'column'}>
-                          <Heading fontWeight={'700'} fontSize={'20px'}>{item.estrategia.toUpperCase()}</Heading>
-                          <Heading marginTop='10px' marginBottom='10px' fontWeight={'500'} fontSize={'16px'}>{item.ativo} - {item.winrate}%</Heading>
-                          <Wrap spacing='5px'>
-                            {item.quadrantes.filter(x => x === "W").length > 0 &&
-                              <WrapItem>
-                                <Box margin={'8px'}>
-                                  <Heading w='25px' fontWeight={'600'} fontSize={'13px'}>{item.quadrantes.filter(x => x === "W").length}</Heading>
-                                  <Quadrant value={'W'} />
-                                </Box>
-                              </WrapItem>
-                            }
-                            {item.quadrantes.filter(x => x === "G1").length > 0 &&
-                              <WrapItem>
-                                <Box margin={'8px'}>
-                                  <Heading w='25px' fontWeight={'600'} fontSize={'13px'}>{item.quadrantes.filter(x => x === "G1").length}</Heading>
-                                  <Quadrant value={'G1'} />
-                                </Box>
-                              </WrapItem>
-                            }
-                            {item.quadrantes.filter(x => x === "G2").length > 0 &&
-                              <WrapItem>
-                                <Box margin={'8px'}>
-                                  <Heading w='25px' fontWeight={'600'} fontSize={'13px'}>{item.quadrantes.filter(x => x === "G2").length}</Heading>
-                                  <Quadrant value={'G2'} />
+              </Center>
+            </Center>
 
-                                </Box>
-                              </WrapItem>
-                            }
-                            {item.quadrantes.filter(x => x === "D").length > 0 &&
-                              <WrapItem>
-                                <Box margin={'8px'}>
-                                  <Heading w='25px' fontWeight={'600'} fontSize={'13px'}>{item.quadrantes.filter(x => x === "D").length}</Heading>
-                                  <Quadrant value={'D'} />
 
-                                </Box>
-                              </WrapItem>
-                            }
-                            <WrapItem>
-                              <Box margin={'8px'}>
-                                {item.quadrantes.filter(x => x === "H").length > 0 &&
-                                  <><Heading w='25px' fontWeight={'600'} fontSize={'13px'}>{item.quadrantes.filter(x => x === "H").length}</Heading>
-                                    <Quadrant value={'H'} />
-                                  </>}
-                              </Box>
-                            </WrapItem>
+            <Center>
+              <Center margin={'0px 0px 20px 0px'} borderRadius='0px 0px 20px 20px' w='100%'>
+                <Heading w='100px' fontWeight={'600'} marginLeft='5px' fontSize={'18px'}>{time} - {gale}</Heading>
 
-                          </Wrap>
-                        </Center>
+                <Box bg='white' borderRadius={'20px'} >
+                  <IconButton borderRadius={'20px'} className={styles.boxicon} aria-label='Search database' onClick={handleSetOpenConfig} icon={<AiTwotoneSetting color='#050D29' size='40px' />} />
+                </Box>
+              </Center>
+            </Center>
 
-                        <Wrap spacing='5.5px' marginTop='20px'>
-                          {item.quadrantes.map((item, index) => (
-                            <WrapItem key={index}>
-                              <Box key={index} margin={'6px'}>
-                                <Quadrant value={item} />
-                              </Box>
-                            </WrapItem>))}
-                        </Wrap>
-                        <Wrap marginTop='30px'>
-                          <WrapItem>
-                            <Center margin='5px' flexDir={'row'}>
-                              <Quadrant value={'w'} />
-                              <Heading marginLeft='5px' fontWeight={'700'} fontSize={'17px'}>Wins Sucessivos: {getWL(item.quadrantes).maxWinStreak}</Heading>
+            <Center>
+
+            </Center>
+
+            <Center w='100%' >
+
+              {data.length > 0 &&
+                <Wrap spacing='15px' justify='center' bg='#000' marginBottom={'10px'}>
+
+                  {data.map((item, index) => (
+                    <WrapItem key={index} >
+                      <Center margin={'15px 10px 20px 10px'} bg='#000323' w='280px' h='495px' borderRadius={'10px'} className={styles.neonBox}>
+                        <Card color='white' align='center' w='100%' h='100%' bg='#000323'>
+                          <CardHeader >
+                            <Center flexDir={'column'}>
+                              <Heading fontWeight={'700'} fontSize={'20px'}>{item.estrategia.toUpperCase()}</Heading>
+                              <Heading marginTop='10px' marginBottom='10px' fontWeight={'500'} fontSize={'16px'}>{item.ativo} - {item.winrate}%</Heading>
+                              <Wrap spacing='5px'>
+                                {item.quadrantes.filter(x => x === "W").length > 0 &&
+                                  <WrapItem>
+                                    <Box margin={'8px'}>
+                                      <Heading w='25px' fontWeight={'600'} fontSize={'13px'}>{item.quadrantes.filter(x => x === "W").length}</Heading>
+                                      <Quadrant value={'W'} />
+                                    </Box>
+                                  </WrapItem>
+                                }
+                                {item.quadrantes.filter(x => x === "G1").length > 0 &&
+                                  <WrapItem>
+                                    <Box margin={'8px'}>
+                                      <Heading w='25px' fontWeight={'600'} fontSize={'13px'}>{item.quadrantes.filter(x => x === "G1").length}</Heading>
+                                      <Quadrant value={'G1'} />
+                                    </Box>
+                                  </WrapItem>
+                                }
+                                {item.quadrantes.filter(x => x === "G2").length > 0 &&
+                                  <WrapItem>
+                                    <Box margin={'8px'}>
+                                      <Heading w='25px' fontWeight={'600'} fontSize={'13px'}>{item.quadrantes.filter(x => x === "G2").length}</Heading>
+                                      <Quadrant value={'G2'} />
+
+                                    </Box>
+                                  </WrapItem>
+                                }
+                                {item.quadrantes.filter(x => x === "D").length > 0 &&
+                                  <WrapItem>
+                                    <Box margin={'8px'}>
+                                      <Heading w='25px' fontWeight={'600'} fontSize={'13px'}>{item.quadrantes.filter(x => x === "D").length}</Heading>
+                                      <Quadrant value={'D'} />
+
+                                    </Box>
+                                  </WrapItem>
+                                }
+                                <WrapItem>
+                                  <Box margin={'8px'}>
+                                    {item.quadrantes.filter(x => x === "H").length > 0 &&
+                                      <><Heading w='25px' fontWeight={'600'} fontSize={'13px'}>{item.quadrantes.filter(x => x === "H").length}</Heading>
+                                        <Quadrant value={'H'} />
+                                      </>}
+                                  </Box>
+                                </WrapItem>
+
+                              </Wrap>
                             </Center>
 
-                          </WrapItem>
-                          <WrapItem>
-                            <Center marginLeft='5px' flexDir={'row'}>
-                              <Quadrant value={'l'} />
-                              <Heading marginLeft='5px' fontWeight={'700'} fontSize={'17px'}>Losses Sucessivos:  {getWL(item.quadrantes).maxHitStreak}</Heading>
-                            </Center>
+                            <Wrap spacing='5.5px' marginTop='20px'>
+                              {item.quadrantes.map((item, index) => (
+                                <WrapItem key={index}>
+                                  <Box key={index} margin={'6px'}>
+                                    <Quadrant value={item} />
+                                  </Box>
+                                </WrapItem>))}
+                            </Wrap>
+                            <Wrap marginTop='30px'>
+                              <WrapItem>
+                                <Center margin='5px' flexDir={'row'}>
+                                  <Quadrant value={'w'} />
+                                  <Heading marginLeft='5px' fontWeight={'700'} fontSize={'17px'}>Wins Sucessivos: {getWL(item.quadrantes).maxWinStreak}</Heading>
+                                </Center>
 
-                          </WrapItem>
-                        </Wrap>
+                              </WrapItem>
+                              <WrapItem>
+                                <Center marginLeft='5px' flexDir={'row'}>
+                                  <Quadrant value={'l'} />
+                                  <Heading marginLeft='5px' fontWeight={'700'} fontSize={'17px'}>Losses Sucessivos:  {getWL(item.quadrantes).maxHitStreak}</Heading>
+                                </Center>
 
-                      </CardHeader>
-                      {/*<CardFooter>
+                              </WrapItem>
+                            </Wrap>
+
+                          </CardHeader>
+                          {/*<CardFooter>
                         <Center flexDir={'column'}>
                           <Button display={'none'} colorScheme='blue'>View here</Button>
                           <Heading marginBottom='5px' fontWeight={'300'} fontSize={'15px'}>Última Análise: {''}</Heading>
                         </Center>
                           </CardFooter>*/}
-                    </Card>
-                  </Center>
-                </WrapItem>
-              ))}
-            </Wrap>}
+                        </Card>
+                      </Center>
+                    </WrapItem>
+                  ))}
+                </Wrap>}
 
-        </Center>
-
+            </Center>
+          </>
+        }
+        {section === 'CATALOGASIN' &&
+          <>
+           <CatalogerS/>
+          </>
+        }
         <section id='contato'>
           <Box
             flexDir={'column'}
@@ -418,9 +447,17 @@ function Home() {
 
 
             </Box>
+            <Center flexDir={'column'} fontSize={'sm'} fontWeight={'bold'} color='blue.300'>
+              <Text>PARCERIA COM  </Text>
+              <Link marginBottom={'10px'} href=' https://t.me/+RNhOqAbXil1hYjg5' isExternal>
+
+                <Image borderRadius='25px' w='90px' src={'https://i.imgur.com/Towqk9b.png'} alt='da' /></Link></Center>
           </Box>
         </section>
-      </Box></>
+      </Box>
+
+
+    </>
   )
 }
 

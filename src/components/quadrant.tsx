@@ -1,6 +1,6 @@
 import { Box, Center } from "@chakra-ui/react";
 import styles from './style.module.css'
-export default function Quadrant({value }): JSX.Element {
+export default function Quadrant({value }): any {
    
     return (
         <>
